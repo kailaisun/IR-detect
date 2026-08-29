@@ -32,6 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=project_dir / "predictions")
     parser.add_argument("--imgsz", type=int, default=320)
     parser.add_argument("--conf", type=float, default=0.25)
+    parser.add_argument("--iou", type=float, default=0.5)
     parser.add_argument("--device", default="0")
     parser.add_argument(
         "--upscale",
@@ -69,6 +70,9 @@ def main() -> None:
         source=[str(path) for path in images],
         imgsz=args.imgsz,
         conf=args.conf,
+        iou=args.iou,
+        nms=True,
+        agnostic_nms=True,
         device=args.device,
         stream=True,
         verbose=False,
@@ -95,7 +99,8 @@ def main() -> None:
                             "state_zh": STATE_ZH.get(state, state),
                         }
                     )
-            record = {"image": str(source_path), "detections": detections}
+            # Keep exported JSON portable and avoid leaking machine-specific paths.
+            record = {"image": source_path.name, "detections": detections}
             output_jsonl.write(json.dumps(record, ensure_ascii=False) + "\n")
 
             annotated = result.plot()

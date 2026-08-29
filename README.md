@@ -45,9 +45,33 @@ and one `script_b2` scene.
 
 ## Held-out test results
 
-Final metrics and per-class results are recorded in `results/metrics.json`.
-Training curves, confusion matrices, and infrared-only examples are included
-under `results/` and `examples/`.
+The best checkpoint is from epoch 60; early stopping ended training at epoch 80.
+The following numbers are from the untouched test rooms, not the validation
+split used for checkpoint selection.
+
+| Class | Precision | Recall | mAP50 | mAP50–95 |
+|---|---:|---:|---:|---:|
+| **Overall** | **0.817** | **0.737** | **0.784** | **0.507** |
+| `lie` | 0.899 | 0.835 | 0.890 | 0.552 |
+| `sit` | 0.812 | 0.839 | 0.865 | 0.585 |
+| `other` | 0.765 | 0.514 | 0.579 | 0.421 |
+| `off_bed` | 0.794 | 0.758 | 0.803 | 0.470 |
+
+Machine-readable metrics are in [`results/metrics.json`](results/metrics.json).
+The repository also includes the [best checkpoint](weights/best.pt),
+[training curves](results/training/results.png),
+[test confusion matrix](results/test_eval/confusion_matrix_normalized.png), and
+infrared-only predictions under [`examples/`](examples/).
+
+### Test examples
+
+| Lie | Sit |
+|---|---|
+| ![lie prediction](examples/example_lie.png) | ![sit prediction](examples/example_sit.png) |
+
+| Other | Off bed |
+|---|---|
+| ![other prediction](examples/example_other.png) | ![off-bed prediction](examples/example_off_bed.png) |
 
 ## Installation and reproduction
 
