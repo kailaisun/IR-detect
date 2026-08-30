@@ -55,19 +55,32 @@ their standard 12-epoch R50 schedules adapted to 320×320 input.
 Metrics below are computed once on rooms 03, 10, and 18 using the published
 inference checkpoints in `mmdetection_results/*/weights/best.pth`.
 
-| Model | mAP50–95 | mAP50 | mAP75 | AR@100 |
-|---|---:|---:|---:|---:|
-| **RTMDet-s** | **0.546** | **0.830** | **0.593** | 0.737 |
-| DINO 4-scale R50 | 0.495 | 0.782 | 0.525 | **0.763** |
-| Faster R-CNN R50-FPN | 0.486 | 0.801 | 0.512 | 0.618 |
+Precision, Recall, and F1 are reported at IoU 0.5 using one confidence
+threshold selected to maximize macro class F1. Every class uses the same
+selected threshold.
 
-Per-class mAP50–95:
+| Model | Precision | Recall | F1 | mAP50–95 | mAP50 | mAP75 | AR@100 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| **RTMDet-s** | **0.823** | **0.762** | **0.791** | **0.546** | **0.830** | **0.593** | 0.737 |
+| Faster R-CNN R50-FPN | 0.810 | 0.756 | 0.777 | 0.486 | 0.801 | 0.512 | 0.618 |
+| DINO 4-scale R50 | 0.774 | 0.713 | 0.739 | 0.495 | 0.782 | 0.525 | **0.763** |
 
-| Model | `lie` | `sit` | `other` | `off_bed` |
-|---|---:|---:|---:|---:|
-| **RTMDet-s** | **0.582** | **0.622** | **0.465** | **0.514** |
-| DINO 4-scale R50 | 0.554 | 0.569 | 0.402 | 0.454 |
-| Faster R-CNN R50-FPN | 0.525 | 0.559 | 0.389 | 0.469 |
+Complete per-class results:
+
+| Model | Class | Precision | Recall | F1 | mAP50 | mAP50–95 |
+|---|---|---:|---:|---:|---:|---:|
+| RTMDet-s | `lie` | 0.918 | 0.838 | 0.876 | 0.920 | 0.582 |
+|  | `sit` | 0.831 | 0.846 | 0.838 | 0.896 | 0.622 |
+|  | `other` | 0.710 | 0.590 | 0.644 | 0.649 | 0.465 |
+|  | `off_bed` | 0.833 | 0.776 | 0.804 | 0.854 | 0.514 |
+| Faster R-CNN R50-FPN | `lie` | 0.894 | 0.856 | 0.875 | 0.898 | 0.525 |
+|  | `sit` | 0.837 | 0.841 | 0.839 | 0.885 | 0.559 |
+|  | `other` | 0.741 | 0.513 | 0.606 | 0.573 | 0.389 |
+|  | `off_bed` | 0.767 | 0.812 | 0.789 | 0.847 | 0.469 |
+| DINO 4-scale R50 | `lie` | 0.920 | 0.774 | 0.841 | 0.887 | 0.554 |
+|  | `sit` | 0.794 | 0.809 | 0.801 | 0.863 | 0.569 |
+|  | `other` | 0.533 | 0.589 | 0.559 | 0.554 | 0.402 |
+|  | `off_bed` | 0.849 | 0.679 | 0.755 | 0.822 | 0.454 |
 
 Comparison with the previously published Ultralytics models:
 

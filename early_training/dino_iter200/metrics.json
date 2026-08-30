@@ -1,0 +1,81 @@
+{
+  "config": "early_training/retrain_configs/dino_save_every_100_iters.py",
+  "checkpoint": "early_training/dino_iter200/weights/model.pth",
+  "image_modality": "infrared pseudo-color PNG only; RGB excluded",
+  "test_images": 12237,
+  "native_mmdetection_metrics": {
+    "coco/lie_precision": 0.533,
+    "coco/sit_precision": 0.531,
+    "coco/other_precision": 0.273,
+    "coco/off_bed_precision": 0.412,
+    "coco/bbox_mAP": 0.438,
+    "coco/bbox_mAP_50": 0.681,
+    "coco/bbox_mAP_75": 0.467,
+    "coco/bbox_mAP_s": 0.41,
+    "coco/bbox_mAP_m": 0.477,
+    "coco/bbox_mAP_l": -1.0
+  },
+  "metrics": {
+    "precision": 0.6864802054490262,
+    "recall": 0.6128998161919774,
+    "f1": 0.6300043506268411,
+    "operating_point": {
+      "iou_threshold": 0.5,
+      "confidence_threshold": 0.304,
+      "selection": "single confidence threshold maximizing macro class F1",
+      "precision": 0.6864802054490262,
+      "recall": 0.6128998161919774,
+      "f1": 0.6300043506268411
+    },
+    "map50_95": 0.4375456520132751,
+    "map50": 0.6807093058187373,
+    "map75": 0.46697868012824517,
+    "ar100": 0.7837352329489715,
+    "per_class": {
+      "lie": {
+        "map50_95": 0.5332816062212139,
+        "map50": 0.8397621329389628,
+        "max_recall50": 0.9978073381084637,
+        "precision": 0.6734551379029443,
+        "recall": 0.8459289577547142,
+        "f1": 0.7499028119735649,
+        "tp": 5787,
+        "fp": 2806,
+        "fn": 1054
+      },
+      "sit": {
+        "map50_95": 0.5312810431232323,
+        "map50": 0.7642783044202376,
+        "max_recall50": 0.9983994309087676,
+        "precision": 0.6782217942545338,
+        "recall": 0.7515561088386982,
+        "f1": 0.7130082672515607,
+        "tp": 4226,
+        "fp": 2005,
+        "fn": 1397
+      },
+      "other": {
+        "map50_95": 0.27333829866705595,
+        "map50": 0.37943001437557017,
+        "max_recall50": 0.9956140350877193,
+        "precision": 0.5465587044534413,
+        "recall": 0.29605263157894735,
+        "f1": 0.38406827880512096,
+        "tp": 270,
+        "fp": 224,
+        "fn": 642
+      },
+      "off_bed": {
+        "map50_95": 0.4122816600415982,
+        "map50": 0.7393667715401789,
+        "max_recall50": 0.9939042974702834,
+        "precision": 0.8476851851851852,
+        "recall": 0.5580615665955502,
+        "f1": 0.6730380444771182,
+        "tp": 1831,
+        "fp": 329,
+        "fn": 1450
+      }
+    }
+  }
+}

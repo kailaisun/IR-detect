@@ -15,3 +15,7 @@ mmdetection_results/**/evaluate*.log
 mmdetection_results/**/benchmark.log
 early_training/candidates/
 early_training/verify_runs/
+early_training/retrain_work_dirs/
+early_training/retrain_logs/
+early_training/**/test_predictions.bbox.json
+early_training/**/test_work_dir/

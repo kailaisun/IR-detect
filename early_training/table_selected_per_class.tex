@@ -1,0 +1,43 @@
+\begin{table*}[t]
+\centering
+\caption{Complete class-wise metrics for the selected non-converged checkpoints.}
+\label{tab:ir_detection_early_per_class}
+\scriptsize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{llccccc}
+\toprule
+Method & Class & Precision & Recall & F1 & $\mathrm{mAP}_{50}$ & $\mathrm{mAP}_{50:95}$ \\
+\midrule
+YOLO11s & Lie & 0.867 & 0.782 & 0.822 & 0.852 & 0.509 \\
+ & Sit & 0.754 & 0.790 & 0.772 & 0.815 & 0.510 \\
+ & Other & 0.498 & 0.468 & 0.482 & 0.452 & 0.294 \\
+ & Off-bed & 0.698 & 0.685 & 0.691 & 0.702 & 0.398 \\
+\midrule
+YOLO26s & Lie & 0.826 & 0.802 & 0.814 & 0.856 & 0.530 \\
+ & Sit & 0.803 & 0.755 & 0.779 & 0.840 & 0.563 \\
+ & Other & 0.634 & 0.549 & 0.589 & 0.562 & 0.387 \\
+ & Off-bed & 0.847 & 0.615 & 0.713 & 0.748 & 0.440 \\
+\midrule
+RT-DETR-L & Lie & 0.889 & 0.776 & 0.828 & 0.859 & 0.559 \\
+ & Sit & 0.778 & 0.836 & 0.806 & 0.861 & 0.594 \\
+ & Other & 0.797 & 0.452 & 0.577 & 0.570 & 0.414 \\
+ & Off-bed & 0.707 & 0.746 & 0.726 & 0.763 & 0.457 \\
+\midrule
+RTMDet-s & Lie & 0.872 & 0.715 & 0.786 & 0.860 & 0.487 \\
+ & Sit & 0.721 & 0.758 & 0.739 & 0.794 & 0.518 \\
+ & Other & 0.715 & 0.457 & 0.558 & 0.544 & 0.360 \\
+ & Off-bed & 0.693 & 0.734 & 0.713 & 0.771 & 0.442 \\
+\midrule
+DINO 4-scale R50 & Lie & 0.673 & 0.846 & 0.750 & 0.840 & 0.533 \\
+ & Sit & 0.678 & 0.752 & 0.713 & 0.764 & 0.531 \\
+ & Other & 0.547 & 0.296 & 0.384 & 0.379 & 0.273 \\
+ & Off-bed & 0.848 & 0.558 & 0.673 & 0.739 & 0.412 \\
+\midrule
+Faster R-CNN R50-FPN & Lie & 0.676 & 0.905 & 0.774 & 0.897 & 0.482 \\
+ & Sit & 0.714 & 0.839 & 0.771 & 0.834 & 0.486 \\
+ & Other & 0.828 & 0.174 & 0.288 & 0.387 & 0.264 \\
+ & Off-bed & 0.786 & 0.679 & 0.728 & 0.773 & 0.415 \\
+\bottomrule
+\end{tabular}
+\end{table*}
