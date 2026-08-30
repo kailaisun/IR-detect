@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Early-training performance after one completed epoch on the scene-disjoint test set.}
+\label{tab:ir_detection_epoch1}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lccccccccc}
+\toprule
+\multirow{2}{*}{Method}
+& \multirow{2}{*}{Epoch}
+& \multirow{2}{*}{Precision}
+& \multirow{2}{*}{Recall}
+& \multirow{2}{*}{$\mathrm{mAP}_{50}$}
+& \multirow{2}{*}{$\mathrm{mAP}_{50:95}$}
+& \multicolumn{4}{c}{Class-wise $\mathrm{mAP}_{50}$} \\
+\cmidrule(lr){7-10}
+& & & & & & Lie & Sit & Other & Off-bed \\
+\midrule
+YOLO26s & 1 & \textbf{0.651} & \textbf{0.587} & \textbf{0.644} & \textbf{0.399} & \textbf{0.813} & \textbf{0.711} & \textbf{0.343} & \textbf{0.708} \\
+RT-DETR-L & 1 & 0.548 & 0.538 & 0.547 & 0.314 & 0.806 & 0.664 & 0.083 & 0.636 \\
+YOLO11s & 1 & 0.557 & 0.510 & 0.508 & 0.258 & 0.666 & 0.462 & 0.256 & 0.648 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+

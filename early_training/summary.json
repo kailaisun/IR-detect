@@ -1,0 +1,240 @@
+{
+  "purpose": "Transparent early-training snapshots; not replacements for the best-checkpoint benchmark.",
+  "test_split": {
+    "rooms": [
+      "room03",
+      "room10",
+      "room18"
+    ],
+    "images": 12237,
+    "instances": 16657
+  },
+  "matched_epoch_1": [
+    "yolo26s_epoch1",
+    "yolo11s_epoch1",
+    "rtdetr_l_epoch1"
+  ],
+  "selected_stage_preview": [
+    "yolo11s_epoch11",
+    "yolo26s_epoch1",
+    "rtdetr_l_epoch1"
+  ],
+  "snapshots": {
+    "yolo26s_epoch1": {
+      "metrics": {
+        "split": "test",
+        "rooms": [
+          "room03",
+          "room10",
+          "room18"
+        ],
+        "images": 12237,
+        "instances": 16657,
+        "overall": {
+          "precision": 0.6506075519218916,
+          "recall": 0.5872794758683051,
+          "mAP50": 0.6437778613205114,
+          "mAP50-95": 0.3988434698994662
+        },
+        "per_class": {
+          "lie": {
+            "precision": 0.709397638637687,
+            "recall": 0.7946206694927642,
+            "mAP50": 0.8131010833119946,
+            "mAP50-95": 0.48464331209906664
+          },
+          "sit": {
+            "precision": 0.7115833791322941,
+            "recall": 0.6304463809354437,
+            "mAP50": 0.7110246554500257,
+            "mAP50-95": 0.4587105543765623
+          },
+          "other": {
+            "precision": 0.45870226515459694,
+            "recall": 0.2852585030095608,
+            "mAP50": 0.3430886564369305,
+            "mAP50-95": 0.250998277742267
+          },
+          "off_bed": {
+            "precision": 0.7227469247629883,
+            "recall": 0.6387923500354519,
+            "mAP50": 0.7078970500830948,
+            "mAP50-95": 0.4010217353799687
+          }
+        },
+        "speed_ms_per_image": {
+          "preprocess": 0.16240049067755605,
+          "inference": 0.3698480110987656,
+          "loss": 2.325343016358171e-05,
+          "postprocess": 0.05233665603115062
+        },
+        "model": "early_training/yolo26s_epoch1/weights/model.pt",
+        "imgsz": 320
+      },
+      "weight": "early_training/yolo26s_epoch1/weights/model.pt",
+      "weight_mib": 19.3
+    },
+    "yolo11s_epoch1": {
+      "metrics": {
+        "split": "test",
+        "rooms": [
+          "room03",
+          "room10",
+          "room18"
+        ],
+        "images": 12237,
+        "instances": 16657,
+        "overall": {
+          "precision": 0.5566747100146896,
+          "recall": 0.5098135694570866,
+          "mAP50": 0.5078934969095306,
+          "mAP50-95": 0.2577292978161016
+        },
+        "per_class": {
+          "lie": {
+            "precision": 0.480333294207429,
+            "recall": 0.790527700628563,
+            "mAP50": 0.6664906520240752,
+            "mAP50-95": 0.32616434949356365
+          },
+          "sit": {
+            "precision": 0.4544045528694589,
+            "recall": 0.5196514316201316,
+            "mAP50": 0.46171234174586206,
+            "mAP50-95": 0.20785592600292416
+          },
+          "other": {
+            "precision": 0.5727540857705259,
+            "recall": 0.17345185999598803,
+            "mAP50": 0.2558219417212596,
+            "mAP50-95": 0.1669327594936168
+          },
+          "off_bed": {
+            "precision": 0.7192069072113445,
+            "recall": 0.5556232855836635,
+            "mAP50": 0.6475490521469254,
+            "mAP50-95": 0.32996415627430187
+          }
+        },
+        "speed_ms_per_image": {
+          "preprocess": 0.15314908375050434,
+          "inference": 0.3712592890726315,
+          "loss": 2.3453705995493177e-05,
+          "postprocess": 0.3661489145331163
+        },
+        "model": "early_training/yolo11s_epoch1/weights/model.pt",
+        "imgsz": 320
+      },
+      "weight": "early_training/yolo11s_epoch1/weights/model.pt",
+      "weight_mib": 18.2
+    },
+    "yolo11s_epoch11": {
+      "metrics": {
+        "split": "test",
+        "rooms": [
+          "room03",
+          "room10",
+          "room18"
+        ],
+        "images": 12237,
+        "instances": 16657,
+        "overall": {
+          "precision": 0.704186336000164,
+          "recall": 0.6812298974566106,
+          "mAP50": 0.7051472281659565,
+          "mAP50-95": 0.42745472492964653
+        },
+        "per_class": {
+          "lie": {
+            "precision": 0.8667363567230268,
+            "recall": 0.7821955854407251,
+            "mAP50": 0.8516860684685879,
+            "mAP50-95": 0.5086768543446103
+          },
+          "sit": {
+            "precision": 0.7541105886775755,
+            "recall": 0.7897610160200068,
+            "mAP50": 0.8149249999312822,
+            "mAP50-95": 0.5098316642804192
+          },
+          "other": {
+            "precision": 0.49766334153397046,
+            "recall": 0.4681911736526073,
+            "mAP50": 0.4523409714330955,
+            "mAP50-95": 0.2935719705905273
+          },
+          "off_bed": {
+            "precision": 0.6982350570660829,
+            "recall": 0.6847718147131027,
+            "mAP50": 0.7016368728308606,
+            "mAP50-95": 0.3977384105030294
+          }
+        },
+        "speed_ms_per_image": {
+          "preprocess": 0.16553280497405304,
+          "inference": 0.37091940196861634,
+          "loss": 2.4308407747848776e-05,
+          "postprocess": 0.32806255823234004
+        },
+        "model": "early_training/yolo11s_epoch11/weights/model.pt",
+        "imgsz": 320
+      },
+      "weight": "early_training/yolo11s_epoch11/weights/model.pt",
+      "weight_mib": 18.2
+    },
+    "rtdetr_l_epoch1": {
+      "metrics": {
+        "split": "test",
+        "rooms": [
+          "room03",
+          "room10",
+          "room18"
+        ],
+        "images": 12237,
+        "instances": 16657,
+        "overall": {
+          "precision": 0.5479453954759987,
+          "recall": 0.5375248123416909,
+          "mAP50": 0.5470934389464833,
+          "mAP50-95": 0.31448567600358945
+        },
+        "per_class": {
+          "lie": {
+            "precision": 0.7924681074892285,
+            "recall": 0.7620230960385909,
+            "mAP50": 0.8062628725157608,
+            "mAP50-95": 0.45861033535894336
+          },
+          "sit": {
+            "precision": 0.5940738055052723,
+            "recall": 0.7867982614787686,
+            "mAP50": 0.6638247892381902,
+            "mAP50-95": 0.40236728385408815
+          },
+          "other": {
+            "precision": 0.1158491882310987,
+            "recall": 0.003289473684210526,
+            "mAP50": 0.08270025045708243,
+            "mAP50-95": 0.054369012157673036
+          },
+          "off_bed": {
+            "precision": 0.6893904806783955,
+            "recall": 0.5979884181651935,
+            "mAP50": 0.6355858435748998,
+            "mAP50-95": 0.34259607264365327
+          }
+        },
+        "speed_ms_per_image": {
+          "preprocess": 0.12348333529571204,
+          "inference": 1.9274383576310117,
+          "loss": 4.753834935789688e-05,
+          "postprocess": 0.06187815341544111
+        },
+        "model": "early_training/rtdetr_l_epoch1/weights/model.pt",
+        "imgsz": 320
+      },
+      "weight": "early_training/rtdetr_l_epoch1/weights/model.pt",
+      "weight_mib": 63.1
+    }
+  }
+}

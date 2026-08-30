@@ -1,5 +1,10 @@
 # IR-detect: YOLO26 infrared person-state detection
 
+Related reports: [YOLO11s](README-yolo11.md),
+[RT-DETR-L](README-rtdetr.md),
+[MMDetection baselines](README-MMDetection.md), and
+[transparent early-training snapshots](early_training/README.md).
+
 YOLO26s person detection and state recognition for the `household_ir` dataset.
 The model uses **only 80×62 thermal-infrared pseudo-color PNGs**. RGB images
 are never included in the generated train/validation/test manifests.

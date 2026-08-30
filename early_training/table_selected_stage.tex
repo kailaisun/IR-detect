@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Illustrative early-stage checkpoints on the scene-disjoint test set. Training epochs differ across methods and the table is not a compute-matched ranking.}
+\label{tab:ir_detection_early_selected}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lccccccccc}
+\toprule
+\multirow{2}{*}{Method}
+& \multirow{2}{*}{Epoch}
+& \multirow{2}{*}{Precision}
+& \multirow{2}{*}{Recall}
+& \multirow{2}{*}{$\mathrm{mAP}_{50}$}
+& \multirow{2}{*}{$\mathrm{mAP}_{50:95}$}
+& \multicolumn{4}{c}{Class-wise $\mathrm{mAP}_{50}$} \\
+\cmidrule(lr){7-10}
+& & & & & & Lie & Sit & Other & Off-bed \\
+\midrule
+YOLO11s & 11 & \textbf{0.704} & \textbf{0.681} & \textbf{0.705} & \textbf{0.427} & \textbf{0.852} & \textbf{0.815} & \textbf{0.452} & 0.702 \\
+YOLO26s & 1 & 0.651 & 0.587 & 0.644 & 0.399 & 0.813 & 0.711 & 0.343 & \textbf{0.708} \\
+RT-DETR-L & 1 & 0.548 & 0.538 & 0.547 & 0.314 & 0.806 & 0.664 & 0.083 & 0.636 \\
+\bottomrule
+\end{tabular}
+\end{table*}
