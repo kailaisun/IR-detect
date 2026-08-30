@@ -1,0 +1,50 @@
+[
+  {
+    "state": "lie",
+    "scene": "room10",
+    "session": "room10_interf_sub",
+    "ir_timestamp_ms": 1761291406257,
+    "ir_prediction": "example_lie.png",
+    "rgb_timestamp_ms": 1761291406272,
+    "rgb_reference": "rgb_lie.jpg",
+    "dt_ms": 15,
+    "rgb_kind": "device_cam",
+    "alignment": "pixel"
+  },
+  {
+    "state": "sit",
+    "scene": "room18",
+    "session": "room18_cam1",
+    "ir_timestamp_ms": 1756522707477,
+    "ir_prediction": "example_sit.png",
+    "rgb_timestamp_ms": 1756522707400,
+    "rgb_reference": "rgb_sit.jpg",
+    "dt_ms": 77,
+    "rgb_kind": "phone_screenrec",
+    "alignment": "semantic"
+  },
+  {
+    "state": "other",
+    "scene": "room10",
+    "session": "room10_clean_sub",
+    "ir_timestamp_ms": 1761288557449,
+    "ir_prediction": "example_other.png",
+    "rgb_timestamp_ms": 1761288557456,
+    "rgb_reference": "rgb_other.jpg",
+    "dt_ms": 7,
+    "rgb_kind": "device_cam",
+    "alignment": "pixel"
+  },
+  {
+    "state": "off_bed",
+    "scene": "room10",
+    "session": "room10_interf_sub",
+    "ir_timestamp_ms": 1761290170372,
+    "ir_prediction": "example_off_bed.png",
+    "rgb_timestamp_ms": 1761290170381,
+    "rgb_reference": "rgb_off_bed.jpg",
+    "dt_ms": 9,
+    "rgb_kind": "device_cam",
+    "alignment": "pixel"
+  }
+]

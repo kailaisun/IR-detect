@@ -25,6 +25,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--name", default="yolo26s_ir_status")
     parser.add_argument("--fraction", type=float, default=1.0)
+    parser.add_argument(
+        "--non-deterministic",
+        action="store_true",
+        help="disable deterministic CUDA algorithms (recommended for RT-DETR)",
+    )
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--no-val", action="store_true")
     return parser.parse_args()
@@ -46,6 +51,7 @@ def main() -> None:
         exist_ok=False,
         cache=False if args.no_cache else "ram",
         fraction=args.fraction,
+        deterministic=not args.non_deterministic,
         val=not args.no_val,
         patience=20,
         plots=True,

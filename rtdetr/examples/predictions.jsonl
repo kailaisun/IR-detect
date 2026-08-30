@@ -1,0 +1,4 @@
+{"image": "1761288557449.png", "detections": [{"bbox_xyxy": [0.529, -0.483, 34.447, 39.839], "confidence": 0.870285, "class_id": 2, "state": "other", "state_zh": "其他行为"}]}
+{"image": "1761290170372.png", "detections": [{"bbox_xyxy": [47.734, 6.779, 60.685, 31.397], "confidence": 0.784866, "class_id": 3, "state": "off_bed", "state_zh": "床下"}]}
+{"image": "1761291406257.png", "detections": [{"bbox_xyxy": [6.889, 23.659, 75.036, 46.604], "confidence": 0.760792, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
+{"image": "1756522707477.png", "detections": [{"bbox_xyxy": [16.523, 0.15, 55.692, 44.989], "confidence": 0.794721, "class_id": 1, "state": "sit", "state_zh": "坐"}]}
