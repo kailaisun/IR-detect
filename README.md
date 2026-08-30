@@ -65,13 +65,18 @@ infrared-only predictions under [`examples/`](examples/).
 
 ### Test examples
 
-| Lie | Sit |
-|---|---|
-| ![lie prediction](examples/example_lie.png) | ![sit prediction](examples/example_sit.png) |
+RGB is shown only as a synchronized visual reference. It is never passed to
+the model. The room10 examples are pixel-aligned; the room03/room18 RGB comes
+from a separate phone viewpoint and is only semantically paired.
+Exact timestamps and time offsets are recorded in
+[`examples/pairs.json`](examples/pairs.json).
 
-| Other | Off bed |
-|---|---|
-| ![other prediction](examples/example_other.png) | ![off-bed prediction](examples/example_off_bed.png) |
+| State | Infrared prediction (model input) | Paired RGB reference |
+|---|---|---|
+| `lie` | ![lie infrared prediction](examples/example_lie.png) | ![lie RGB reference](examples/rgb_lie.jpg) |
+| `sit` | ![sit infrared prediction](examples/example_sit.png) | ![sit RGB reference](examples/rgb_sit.jpg) |
+| `other` | ![other infrared prediction](examples/example_other.png) | ![other RGB reference](examples/rgb_other.jpg) |
+| `off_bed` | ![off-bed infrared prediction](examples/example_off_bed.png) | ![off-bed RGB reference](examples/rgb_off_bed.jpg) |
 
 ## Installation and reproduction
 

@@ -1,12 +1,4 @@
-{"image": "1755151813937.png", "detections": [{"bbox_xyxy": [0.0, 0.0, 29.308, 62.0], "confidence": 0.840543, "class_id": 3, "state": "off_bed", "state_zh": "床下"}]}
-{"image": "1755152546090.png", "detections": [{"bbox_xyxy": [0.104, 4.01, 64.211, 38.383], "confidence": 0.735341, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
-{"image": "1755153015243.png", "detections": [{"bbox_xyxy": [0.0, 0.086, 69.318, 42.58], "confidence": 0.867945, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
-{"image": "1755153667468.png", "detections": [{"bbox_xyxy": [2.377, 11.691, 71.907, 35.261], "confidence": 0.933439, "class_id": 0, "state": "lie", "state_zh": "躺"}, {"bbox_xyxy": [32.207, 0.124, 45.115, 20.233], "confidence": 0.302161, "class_id": 3, "state": "off_bed", "state_zh": "床下"}]}
-{"image": "1761288557449.png", "detections": [{"bbox_xyxy": [0.082, 0.0, 33.797, 40.355], "confidence": 0.917732, "class_id": 2, "state": "other", "state_zh": "其他行为"}]}
-{"image": "1761291406257.png", "detections": [{"bbox_xyxy": [0.122, 22.852, 74.512, 47.856], "confidence": 0.879654, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
-{"image": "1761291685801.png", "detections": [{"bbox_xyxy": [35.224, 0.0, 52.779, 28.668], "confidence": 0.83413, "class_id": 2, "state": "other", "state_zh": "其他行为"}, {"bbox_xyxy": [0.001, 6.735, 16.502, 38.923], "confidence": 0.702867, "class_id": 1, "state": "sit", "state_zh": "坐"}]}
-{"image": "1761295874585.png", "detections": [{"bbox_xyxy": [28.646, 13.992, 33.893, 26.487], "confidence": 0.740326, "class_id": 3, "state": "off_bed", "state_zh": "床下"}, {"bbox_xyxy": [30.919, 21.539, 66.016, 36.679], "confidence": 0.298125, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
-{"image": "1756522707477.png", "detections": [{"bbox_xyxy": [15.96, 1.509, 56.925, 46.818], "confidence": 0.866245, "class_id": 1, "state": "sit", "state_zh": "坐"}]}
-{"image": "1756522717915.png", "detections": [{"bbox_xyxy": [28.239, 2.078, 54.923, 38.998], "confidence": 0.760706, "class_id": 1, "state": "sit", "state_zh": "坐"}, {"bbox_xyxy": [14.883, 0.119, 31.466, 27.724], "confidence": 0.260559, "class_id": 3, "state": "off_bed", "state_zh": "床下"}]}
-{"image": "1756522916939.png", "detections": [{"bbox_xyxy": [5.294, 0.0, 46.97, 43.431], "confidence": 0.815193, "class_id": 1, "state": "sit", "state_zh": "坐"}]}
-{"image": "1756523341089.png", "detections": [{"bbox_xyxy": [0.0, 19.695, 56.085, 47.892], "confidence": 0.882653, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
+{"image": "1755151813937.png", "detections": [{"bbox_xyxy": [0.0, 0.0, 29.308, 62.0], "confidence": 0.840729, "class_id": 3, "state": "off_bed", "state_zh": "床下"}]}
+{"image": "1761288557449.png", "detections": [{"bbox_xyxy": [0.082, 0.0, 33.797, 40.354], "confidence": 0.917804, "class_id": 2, "state": "other", "state_zh": "其他行为"}]}
+{"image": "1761291406257.png", "detections": [{"bbox_xyxy": [0.122, 22.852, 74.511, 47.856], "confidence": 0.879681, "class_id": 0, "state": "lie", "state_zh": "躺"}]}
+{"image": "1756522707477.png", "detections": [{"bbox_xyxy": [15.96, 1.509, 56.926, 46.819], "confidence": 0.866254, "class_id": 1, "state": "sit", "state_zh": "坐"}]}

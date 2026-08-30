@@ -17,6 +17,12 @@ STATE_ZH = {
     "other": "其他行为",
     "off_bed": "床下",
 }
+STATE_COLORS = {
+    "lie": (255, 96, 32),
+    "sit": (255, 200, 32),
+    "other": (200, 32, 255),
+    "off_bed": (32, 200, 32),
+}
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".webp"}
 
 
@@ -33,12 +39,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--imgsz", type=int, default=320)
     parser.add_argument("--conf", type=float, default=0.25)
     parser.add_argument("--iou", type=float, default=0.5)
+    parser.add_argument(
+        "--line-width",
+        type=int,
+        default=2,
+        help="box stroke width in the saved visualization",
+    )
+    parser.add_argument("--font-scale", type=float, default=0.4)
+    parser.add_argument(
+        "--show-confidence",
+        action="store_true",
+        help="include confidence in image labels (always retained in JSONL)",
+    )
     parser.add_argument("--device", default="0")
     parser.add_argument(
         "--upscale",
         type=int,
-        default=1,
-        help="nearest-neighbor scale factor for saved visualizations",
+        default=8,
+        help="nearest-neighbor scale factor for saved visualizations only",
     )
     return parser.parse_args()
 
@@ -53,6 +71,66 @@ def collect_images(source: Path) -> list[Path]:
             if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES
         )
     raise FileNotFoundError(source)
+
+
+def render_prediction(
+    image,
+    detections: list[dict],
+    upscale: int,
+    line_width: int,
+    font_scale: float,
+    show_confidence: bool,
+):
+    """Upscale first, then draw thin boxes and compact labels at output resolution."""
+    if upscale > 1:
+        image = cv2.resize(
+            image,
+            None,
+            fx=upscale,
+            fy=upscale,
+            interpolation=cv2.INTER_NEAREST,
+        )
+    height, width = image.shape[:2]
+    scale = float(upscale)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    text_thickness = 1
+    for detection in detections:
+        x1, y1, x2, y2 = [int(round(value * scale)) for value in detection["bbox_xyxy"]]
+        x1, x2 = sorted((max(0, min(x1, width - 1)), max(0, min(x2, width - 1))))
+        y1, y2 = sorted((max(0, min(y1, height - 1)), max(0, min(y2, height - 1))))
+        state = detection["state"]
+        color = STATE_COLORS.get(state, (255, 255, 255))
+        cv2.rectangle(image, (x1, y1), (x2, y2), color, line_width, cv2.LINE_AA)
+
+        label = state
+        if show_confidence:
+            label += f" {detection['confidence']:.2f}"
+        (text_width, text_height), baseline = cv2.getTextSize(
+            label, font, font_scale, text_thickness
+        )
+        label_x = max(0, min(x1, width - text_width - 6))
+        label_top = y1 - text_height - baseline - 6
+        if label_top < 0:
+            label_top = y1
+        label_bottom = min(height - 1, label_top + text_height + baseline + 6)
+        cv2.rectangle(
+            image,
+            (label_x, label_top),
+            (min(width - 1, label_x + text_width + 6), label_bottom),
+            color,
+            -1,
+        )
+        cv2.putText(
+            image,
+            label,
+            (label_x + 3, label_top + text_height + 2),
+            font,
+            font_scale,
+            (255, 255, 255),
+            text_thickness,
+            cv2.LINE_AA,
+        )
+    return image
 
 
 def main() -> None:
@@ -103,15 +181,14 @@ def main() -> None:
             record = {"image": source_path.name, "detections": detections}
             output_jsonl.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-            annotated = result.plot()
-            if args.upscale > 1:
-                annotated = cv2.resize(
-                    annotated,
-                    None,
-                    fx=args.upscale,
-                    fy=args.upscale,
-                    interpolation=cv2.INTER_NEAREST,
-                )
+            annotated = render_prediction(
+                result.orig_img.copy(),
+                detections,
+                args.upscale,
+                args.line_width,
+                args.font_scale,
+                args.show_confidence,
+            )
             rendered_name = f"{index:06d}_{source_path.parent.name}_{source_path.name}"
             if not cv2.imwrite(str(args.output / rendered_name), annotated):
                 raise RuntimeError(f"Failed to write rendered prediction for {source_path}")
