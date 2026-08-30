@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate a trained YOLO26 model on the scene-held-out test split."""
+"""Evaluate a trained YOLO model on the scene-held-out test split."""
 
 from __future__ import annotations
 
@@ -16,6 +16,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", type=Path, default=project_dir / "weights/best.pt")
     parser.add_argument("--data", type=Path, default=project_dir / "dataset/dataset.yaml")
     parser.add_argument("--output", type=Path, default=project_dir / "results/metrics.json")
+    parser.add_argument("--project", type=Path, default=project_dir / "results")
+    parser.add_argument("--name", default="test_eval")
     parser.add_argument("--imgsz", type=int, default=320)
     parser.add_argument("--batch", type=int, default=256)
     parser.add_argument("--device", default="0")
@@ -34,8 +36,8 @@ def main() -> None:
         batch=args.batch,
         device=args.device,
         workers=args.workers,
-        project=str((project_dir / "results").resolve()),
-        name="test_eval",
+        project=str(args.project.resolve()),
+        name=args.name,
         exist_ok=True,
         plots=True,
         verbose=True,

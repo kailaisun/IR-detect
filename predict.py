@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run infrared-only YOLO26 inference and emit boxes plus human states."""
+"""Run infrared-only YOLO inference and emit boxes plus human states."""
 
 from __future__ import annotations
 

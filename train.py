@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train YOLO26s to predict a person bounding box and human state."""
+"""Train a YOLO detector to predict a person bounding box and human state."""
 
 from __future__ import annotations
 
