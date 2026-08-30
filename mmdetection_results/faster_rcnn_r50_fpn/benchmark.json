@@ -1,0 +1,16 @@
+{
+  "config": "mmdetection_configs/faster_rcnn_r50_fpn_ir.py",
+  "checkpoint": "mmdetection_results/faster_rcnn_r50_fpn/weights/best.pth",
+  "device": "NVIDIA L40S",
+  "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+  "model_input_size": 320,
+  "batch_size": 1,
+  "frames_per_repeat": 1000,
+  "repeats": 3,
+  "warmup_frames": 100,
+  "latency_ms_mean": 12.875423069616469,
+  "latency_ms_median": 12.71068601636216,
+  "latency_ms_p95": 12.984698981745169,
+  "fps_from_mean": 77.66735078086936,
+  "scope": "MMDetection ndarray pipeline + forward + postprocess; disk I/O excluded"
+}

@@ -5,3 +5,11 @@ runs/
 predictions/
 *.cache
 *.pyc
+third_party/
+mmdetection_data/
+mmdetection_work_dirs/
+mmdetection_logs/
+mmdetection_results/**/test_predictions.bbox.json
+mmdetection_results/**/test_work_dir/
+mmdetection_results/**/evaluate*.log
+mmdetection_results/**/benchmark.log

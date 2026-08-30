@@ -1,0 +1,46 @@
+{
+  "config": "mmdetection_configs/dino_4scale_r50_ir.py",
+  "checkpoint": "mmdetection_results/dino_4scale_r50/weights/best.pth",
+  "image_modality": "infrared pseudo-color PNG only; RGB excluded",
+  "test_images": 12237,
+  "native_mmdetection_metrics": {
+    "coco/lie_precision": 0.554,
+    "coco/sit_precision": 0.569,
+    "coco/other_precision": 0.402,
+    "coco/off_bed_precision": 0.454,
+    "coco/bbox_mAP": 0.495,
+    "coco/bbox_mAP_50": 0.782,
+    "coco/bbox_mAP_75": 0.525,
+    "coco/bbox_mAP_s": 0.448,
+    "coco/bbox_mAP_m": 0.571,
+    "coco/bbox_mAP_l": -1.0
+  },
+  "metrics": {
+    "map50_95": 0.4946302143712187,
+    "map50": 0.7817463577053823,
+    "map75": 0.5250190484801946,
+    "ar100": 0.7626048951536092,
+    "per_class": {
+      "lie": {
+        "map50_95": 0.5538571199561511,
+        "map50": 0.8874779371690911,
+        "max_recall50": 0.9966379184329777
+      },
+      "sit": {
+        "map50_95": 0.5686231603060026,
+        "map50": 0.8630267342720571,
+        "max_recall50": 0.9982215898986306
+      },
+      "other": {
+        "map50_95": 0.4021219664551831,
+        "map50": 0.5544882692911948,
+        "max_recall50": 0.9956140350877193
+      },
+      "off_bed": {
+        "map50_95": 0.453918610767538,
+        "map50": 0.8219924900891862,
+        "max_recall50": 0.9932947272173118
+      }
+    }
+  }
+}

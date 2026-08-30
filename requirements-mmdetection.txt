@@ -1,0 +1,10 @@
+# Install torch/torchvision from the CUDA 12.1 PyTorch index first.
+torch==2.1.2
+torchvision==0.16.2
+numpy==1.26.4
+mmcv==2.1.0
+mmengine==0.10.7
+mmdet==3.3.0
+pycocotools==2.0.11
+opencv-python==4.11.0.86
+matplotlib==3.10.9

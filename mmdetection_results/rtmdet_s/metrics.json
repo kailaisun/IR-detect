@@ -1,0 +1,46 @@
+{
+  "config": "mmdetection_configs/rtmdet_s_ir.py",
+  "checkpoint": "mmdetection_results/rtmdet_s/weights/best.pth",
+  "image_modality": "infrared pseudo-color PNG only; RGB excluded",
+  "test_images": 12237,
+  "native_mmdetection_metrics": {
+    "coco/lie_precision": 0.582,
+    "coco/sit_precision": 0.622,
+    "coco/other_precision": 0.465,
+    "coco/off_bed_precision": 0.514,
+    "coco/bbox_mAP": 0.546,
+    "coco/bbox_mAP_50": 0.83,
+    "coco/bbox_mAP_75": 0.593,
+    "coco/bbox_mAP_s": 0.502,
+    "coco/bbox_mAP_m": 0.619,
+    "coco/bbox_mAP_l": -1.0
+  },
+  "metrics": {
+    "map50_95": 0.5457775861595412,
+    "map50": 0.8297627995756949,
+    "map75": 0.5930421895812432,
+    "ar100": 0.7367848284076256,
+    "per_class": {
+      "lie": {
+        "map50_95": 0.5823250528179303,
+        "map50": 0.9198837855447735,
+        "max_recall50": 0.9978073381084637
+      },
+      "sit": {
+        "map50_95": 0.6220336645694436,
+        "map50": 0.896196121012254,
+        "max_recall50": 0.9989329539391784
+      },
+      "other": {
+        "map50_95": 0.4648918594206969,
+        "map50": 0.6485375411464204,
+        "max_recall50": 0.9923245614035088
+      },
+      "off_bed": {
+        "map50_95": 0.5138597678300936,
+        "map50": 0.854433750599331,
+        "max_recall50": 0.9954282231027126
+      }
+    }
+  }
+}
