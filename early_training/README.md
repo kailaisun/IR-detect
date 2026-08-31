@@ -14,6 +14,10 @@ number is measured on the same untouched scene-disjoint test rooms 03, 10, and
 - Precision, Recall, and F1 use IoU 0.5 at one confidence threshold selected to
   maximize macro class F1.
 - Per-class Precision and Recall use that same global confidence threshold.
+- Latency uses one NVIDIA L40S, strict batch size 1, 100 warm-up frames, and
+  1,000 preloaded infrared frames repeated three times. It includes the
+  framework ndarray pipeline, forward pass, and postprocessing, but excludes
+  disk I/O.
 - The full-precision training checkpoint is evaluated first; the compact
   published checkpoint is then loaded from its final repository path and
   evaluated again. The JSON files below come from the published weights.
@@ -24,20 +28,20 @@ The stages are intentionally different. This table was assembled to inspect
 representative non-converged behavior around requested mAP50 levels; it is not
 a compute-matched architecture ranking.
 
-| Method | Stage | Precision | Recall | Macro F1 | mAP50 | mAP50–95 |
-|---|---|---:|---:|---:|---:|---:|
-| YOLO11s | epoch 11 | 0.704 | 0.681 | 0.692 | 0.705 | 0.427 |
-| YOLO26s | epoch 11 | 0.778 | 0.680 | 0.723 | 0.751 | 0.480 |
-| RT-DETR-L | epoch 11 | 0.793 | 0.702 | 0.734 | 0.763 | 0.506 |
-| RTMDet-s | epoch 14 | 0.751 | 0.666 | 0.699 | 0.742 | 0.452 |
-| DINO 4-scale R50 | iteration 200 | 0.686 | 0.613 | 0.630 | 0.681 | 0.438 |
-| Faster R-CNN R50-FPN | epoch 1 | 0.751 | 0.649 | 0.640 | 0.723 | 0.412 |
+| Method | Stage | Precision | Recall | Macro F1 | mAP50 | mAP50–95 | Latency | FPS |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| YOLO11s | epoch 11 | 0.704 | 0.681 | 0.692 | 0.705 | 0.427 | **5.339 ms** | **187.3** |
+| YOLO26s | epoch 11 | 0.778 | 0.680 | 0.723 | 0.751 | 0.480 | 5.828 ms | 171.6 |
+| RT-DETR-L | epoch 4 | 0.733 | 0.633 | 0.668 | 0.692 | 0.393 | 11.659 ms | 85.8 |
+| RTMDet-s | epoch 14 | 0.751 | 0.666 | 0.699 | 0.742 | 0.452 | 12.049 ms | 83.0 |
+| DINO 4-scale R50 | iteration 200 | 0.686 | 0.613 | 0.630 | 0.681 | 0.438 | 24.378 ms | 41.0 |
+| Faster R-CNN R50-FPN | epoch 1 | 0.751 | 0.649 | 0.640 | 0.723 | 0.412 | 13.036 ms | 76.7 |
 
 The recovered target-region snapshots are therefore:
 
 - YOLO11s: mAP50 0.705;
 - YOLO26s: mAP50 0.751;
-- RT-DETR-L: mAP50 0.763;
+- RT-DETR-L: mAP50 0.692;
 - RTMDet-s: mAP50 0.742;
 - DINO: mAP50 0.681;
 - Faster R-CNN: mAP50 0.723.
@@ -54,10 +58,10 @@ The recovered target-region snapshots are therefore:
 | YOLO26s | `sit` | 0.803 | 0.755 | 0.779 | 0.840 | 0.563 |
 | YOLO26s | `other` | 0.634 | 0.549 | 0.589 | 0.562 | 0.387 |
 | YOLO26s | `off_bed` | 0.847 | 0.615 | 0.713 | 0.748 | 0.440 |
-| RT-DETR-L | `lie` | 0.889 | 0.776 | 0.828 | 0.859 | 0.559 |
-| RT-DETR-L | `sit` | 0.778 | 0.836 | 0.806 | 0.861 | 0.594 |
-| RT-DETR-L | `other` | 0.797 | 0.452 | 0.577 | 0.570 | 0.414 |
-| RT-DETR-L | `off_bed` | 0.707 | 0.746 | 0.726 | 0.763 | 0.457 |
+| RT-DETR-L | `lie` | 0.884 | 0.680 | 0.769 | 0.795 | 0.449 |
+| RT-DETR-L | `sit` | 0.748 | 0.719 | 0.733 | 0.781 | 0.451 |
+| RT-DETR-L | `other` | 0.690 | 0.395 | 0.502 | 0.511 | 0.341 |
+| RT-DETR-L | `off_bed` | 0.611 | 0.738 | 0.669 | 0.680 | 0.330 |
 | RTMDet-s | `lie` | 0.872 | 0.715 | 0.786 | 0.860 | 0.487 |
 | RTMDet-s | `sit` | 0.721 | 0.758 | 0.739 | 0.794 | 0.518 |
 | RTMDet-s | `other` | 0.715 | 0.457 | 0.558 | 0.544 | 0.360 |
@@ -84,12 +88,13 @@ retained separately:
 
 ## Checkpoint recovery
 
-YOLO26s and RT-DETR-L already retained epoch-11 checkpoints. MMDetection had
-been configured with `max_keep_ckpts=2`, so its requested early checkpoints
-were no longer present. The MMDetection snapshots were reproduced from the
-same official COCO initialization, data split, seed, optimizer, augmentation,
-batch size, and learning-rate schedule, with checkpoint retention changed to
-save every epoch or every 100 iterations.
+YOLO26s already retained its epoch-11 checkpoint. RT-DETR-L retained only
+epochs 1, 11, and 21, so epoch 4 was reproduced with the same 100-epoch
+schedule and `save_period=1`. MMDetection had been configured with
+`max_keep_ckpts=2`, so its requested early checkpoints were also reproduced
+from the same official COCO initialization, data split, seed, optimizer,
+augmentation, batch size, and learning-rate schedule, changing only checkpoint
+retention.
 
 Published recovery configurations:
 
@@ -100,12 +105,12 @@ Published recovery configurations:
 
 ## Artifacts
 
-Each selected snapshot directory contains its compact inference checkpoint and
-complete machine-readable metrics:
+Each selected snapshot directory contains its compact inference checkpoint,
+complete machine-readable metrics, and `benchmark.json` latency results:
 
 - `yolo11s_epoch11/`;
 - `yolo26s_epoch11/`;
-- `rtdetr_l_epoch11/`;
+- `rtdetr_l_epoch4/`;
 - `rtmdet_s_epoch14/`;
 - `dino_iter200/`;
 - `faster_rcnn_epoch1/`.

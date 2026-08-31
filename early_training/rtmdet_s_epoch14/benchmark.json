@@ -1,0 +1,16 @@
+{
+  "config": "early_training/retrain_configs/rtmdet_s_save_every_epoch.py",
+  "checkpoint": "early_training/rtmdet_s_epoch14/weights/model.pth",
+  "device": "NVIDIA L40S",
+  "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+  "model_input_size": 320,
+  "batch_size": 1,
+  "frames_per_repeat": 1000,
+  "repeats": 3,
+  "warmup_frames": 100,
+  "latency_ms_mean": 12.04904638727506,
+  "latency_ms_median": 12.021083966828883,
+  "latency_ms_p95": 12.195769022218883,
+  "fps_from_mean": 82.99411985467125,
+  "scope": "MMDetection ndarray pipeline + forward + postprocess; disk I/O excluded"
+}

@@ -1,0 +1,15 @@
+{
+  "model": "early_training/rtdetr_l_epoch4/weights/model.pt",
+  "device": "NVIDIA L40S",
+  "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+  "model_input_size": 320,
+  "batch_size": 1,
+  "frames_per_repeat": 1000,
+  "repeats": 3,
+  "warmup_frames": 100,
+  "latency_ms_mean": 11.659094090340659,
+  "latency_ms_median": 11.637724994216114,
+  "latency_ms_p95": 11.74649206805043,
+  "fps_from_mean": 85.76995710399844,
+  "scope": "Ultralytics ndarray predict pipeline + forward + postprocess; disk I/O excluded"
+}

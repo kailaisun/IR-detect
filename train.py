@@ -24,6 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="0")
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--name", default="yolo26s_ir_status")
+    parser.add_argument("--save-period", type=int, default=10)
     parser.add_argument("--fraction", type=float, default=1.0)
     parser.add_argument(
         "--non-deterministic",
@@ -55,7 +56,7 @@ def main() -> None:
         val=not args.no_val,
         patience=20,
         plots=True,
-        save_period=10,
+        save_period=args.save_period,
         pretrained=True,
         optimizer="auto",
         cls_pw=0.25,

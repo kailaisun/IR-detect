@@ -1,0 +1,15 @@
+{
+  "model": "early_training/yolo26s_epoch11/weights/model.pt",
+  "device": "NVIDIA L40S",
+  "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+  "model_input_size": 320,
+  "batch_size": 1,
+  "frames_per_repeat": 1000,
+  "repeats": 3,
+  "warmup_frames": 100,
+  "latency_ms_mean": 5.828038231392081,
+  "latency_ms_median": 5.749441450461745,
+  "latency_ms_p95": 6.050952977966517,
+  "fps_from_mean": 171.58432396918934,
+  "scope": "Ultralytics ndarray predict pipeline + forward + postprocess; disk I/O excluded"
+}

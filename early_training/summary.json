@@ -14,6 +14,15 @@
     "selection": "single confidence threshold maximizing macro class F1",
     "note": "Ultralytics native P/R uses the equivalent best-F1 operating-point convention; MMDetection P/R is computed from COCOeval matches."
   },
+  "latency_protocol": {
+    "device": "NVIDIA L40S",
+    "batch_size": 1,
+    "frames_per_repeat": 1000,
+    "repeats": 3,
+    "warmup_frames": 100,
+    "input": "preloaded 80x62 IR ndarray",
+    "scope": "framework ndarray inference pipeline + forward + postprocess; disk I/O excluded"
+  },
   "selected_stage_snapshots": [
     {
       "model": "YOLO11s",
@@ -59,6 +68,21 @@
           "map50": 0.7016368728308606,
           "map50_95": 0.3977384105030294
         }
+      },
+      "benchmark": {
+        "model": "early_training/yolo11s_epoch11/weights/model.pt",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 5.3393236287326244,
+        "latency_ms_median": 5.327402031980455,
+        "latency_ms_p95": 5.384512944146991,
+        "fps_from_mean": 187.2896399496515,
+        "scope": "Ultralytics ndarray predict pipeline + forward + postprocess; disk I/O excluded"
       }
     },
     {
@@ -105,52 +129,82 @@
           "map50": 0.7477487911004574,
           "map50_95": 0.440273233934487
         }
+      },
+      "benchmark": {
+        "model": "early_training/yolo26s_epoch11/weights/model.pt",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 5.828038231392081,
+        "latency_ms_median": 5.749441450461745,
+        "latency_ms_p95": 6.050952977966517,
+        "fps_from_mean": 171.58432396918934,
+        "scope": "Ultralytics ndarray predict pipeline + forward + postprocess; disk I/O excluded"
       }
     },
     {
       "model": "RT-DETR-L",
       "framework": "Ultralytics",
-      "stage": "epoch 11",
-      "target_map50": null,
-      "artifact_dir": "early_training/rtdetr_l_epoch11",
-      "weight": "early_training/rtdetr_l_epoch11/weights/model.pt",
+      "stage": "epoch 4",
+      "target_map50": 0.7,
+      "artifact_dir": "early_training/rtdetr_l_epoch4",
+      "weight": "early_training/rtdetr_l_epoch4/weights/model.pt",
       "weight_mib": 63.1,
       "overall": {
-        "precision": 0.7926626944359811,
-        "recall": 0.7023814505620369,
-        "f1": 0.7342601256089747,
-        "map50": 0.7632977622941688,
-        "map50_95": 0.5058816104779975
+        "precision": 0.7331955956302291,
+        "recall": 0.6329253754725729,
+        "f1": 0.6681043340489099,
+        "map50": 0.6917675045046385,
+        "map50_95": 0.39272292374051015
       },
       "per_class": {
         "lie": {
-          "precision": 0.8886305378347031,
-          "recall": 0.7756345884679319,
-          "f1": 0.8282966104621977,
-          "map50": 0.8587269582837885,
-          "map50_95": 0.5585513558841313
+          "precision": 0.8844324841124982,
+          "recall": 0.679579008916825,
+          "f1": 0.768589941551981,
+          "map50": 0.7947255971256469,
+          "map50_95": 0.4487083892825748
         },
         "sit": {
-          "precision": 0.7779945414068711,
-          "recall": 0.8363862706740174,
-          "f1": 0.8061343992973968,
-          "map50": 0.8611584607022743,
-          "map50_95": 0.593912047134957
+          "precision": 0.7478167306312162,
+          "recall": 0.7193668860039125,
+          "f1": 0.733315975882503,
+          "map50": 0.7811746762836685,
+          "map50_95": 0.45061023044077925
         },
         "other": {
-          "precision": 0.7969932344742302,
-          "recall": 0.4520005237218639,
-          "f1": 0.5768505359152897,
-          "map50": 0.570365425455024,
-          "map50_95": 0.41388932426171443
+          "precision": 0.6895623786707382,
+          "recall": 0.39456603062088,
+          "f1": 0.5019292701597666,
+          "map50": 0.5113156967795228,
+          "map50_95": 0.3411664663434696
         },
         "off_bed": {
-          "precision": 0.7070324640281205,
-          "recall": 0.7455044193843341,
-          "f1": 0.7257589567610143,
-          "map50": 0.7629402047355882,
-          "map50_95": 0.45717371463118717
+          "precision": 0.6109707891064637,
+          "recall": 0.7381895763486742,
+          "f1": 0.6685821486013889,
+          "map50": 0.6798540478297158,
+          "map50_95": 0.33040660889521706
         }
+      },
+      "benchmark": {
+        "model": "early_training/rtdetr_l_epoch4/weights/model.pt",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 11.659094090340659,
+        "latency_ms_median": 11.637724994216114,
+        "latency_ms_p95": 11.74649206805043,
+        "fps_from_mean": 85.76995710399844,
+        "scope": "Ultralytics ndarray predict pipeline + forward + postprocess; disk I/O excluded"
       }
     },
     {
@@ -197,6 +251,22 @@
           "map50": 0.7710369744357468,
           "map50_95": 0.44178056823264694
         }
+      },
+      "benchmark": {
+        "config": "early_training/retrain_configs/rtmdet_s_save_every_epoch.py",
+        "checkpoint": "early_training/rtmdet_s_epoch14/weights/model.pth",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 12.04904638727506,
+        "latency_ms_median": 12.021083966828883,
+        "latency_ms_p95": 12.195769022218883,
+        "fps_from_mean": 82.99411985467125,
+        "scope": "MMDetection ndarray pipeline + forward + postprocess; disk I/O excluded"
       }
     },
     {
@@ -243,6 +313,22 @@
           "map50": 0.7393667715401789,
           "map50_95": 0.4122816600415982
         }
+      },
+      "benchmark": {
+        "config": "early_training/retrain_configs/dino_save_every_100_iters.py",
+        "checkpoint": "early_training/dino_iter200/weights/model.pth",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 24.378058635862544,
+        "latency_ms_median": 23.938846483360976,
+        "latency_ms_p95": 28.97500593680862,
+        "fps_from_mean": 41.02049367167001,
+        "scope": "MMDetection ndarray pipeline + forward + postprocess; disk I/O excluded"
       }
     },
     {
@@ -289,6 +375,22 @@
           "map50": 0.7729947591248567,
           "map50_95": 0.41481320799847254
         }
+      },
+      "benchmark": {
+        "config": "early_training/retrain_configs/faster_rcnn_save_every_epoch.py",
+        "checkpoint": "early_training/faster_rcnn_epoch1/weights/model.pth",
+        "device": "NVIDIA L40S",
+        "input": "preloaded 80x62 three-channel IR pseudo-color ndarray",
+        "model_input_size": 320,
+        "batch_size": 1,
+        "frames_per_repeat": 1000,
+        "repeats": 3,
+        "warmup_frames": 100,
+        "latency_ms_mean": 13.035776384174824,
+        "latency_ms_median": 12.81969650881365,
+        "latency_ms_p95": 13.015598588390276,
+        "fps_from_mean": 76.7119633329995,
+        "scope": "MMDetection ndarray pipeline + forward + postprocess; disk I/O excluded"
       }
     }
   ],
