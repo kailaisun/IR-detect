@@ -46,6 +46,24 @@ The recovered target-region snapshots are therefore:
 - DINO: mAP50 0.681;
 - Faster R-CNN: mAP50 0.723.
 
+## Additional sit example
+
+The following held-out `room10` frame provides a second sit example. It
+contains one annotated sitting person. All six selected-stage checkpoints
+produce one correct `sit` detection at the reporting threshold.
+
+The RGB reference is captured by the same device, is pixel-aligned with the
+infrared frame, and differs by 14 ms. RGB is shown only for interpretation and
+is not used by any detector.
+
+![Additional sit example across all selected models](examples/sit_extra/montage.jpg)
+
+Exact IR/RGB timestamps, the ground-truth box, prediction boxes, classes, and
+confidence scores are recorded in
+[`examples/sit_extra/metadata.json`](examples/sit_extra/metadata.json). The six
+individual prediction images and raw JSONL outputs are retained in the same
+directory.
+
 ## Complete per-class metrics
 
 | Method | Class | Precision | Recall | F1 | mAP50 | mAP50–95 |

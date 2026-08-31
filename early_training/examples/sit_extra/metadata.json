@@ -1,0 +1,99 @@
+{
+  "state": "sit",
+  "scene": "room10",
+  "session": "room10_clean_sub",
+  "ir_timestamp_ms": 1761288793953,
+  "rgb_timestamp_ms": 1761288793967,
+  "dt_ms": 14,
+  "alignment": "pixel",
+  "rgb_kind": "device_cam",
+  "ground_truth_bbox_xyxy": [
+    0.0,
+    0.0,
+    29.473,
+    39.315
+  ],
+  "models": {
+    "yolo11s": [
+      {
+        "bbox_xyxy": [
+          0.0,
+          0.346,
+          30.59,
+          39.182
+        ],
+        "confidence": 0.97374,
+        "class_id": 1,
+        "state": "sit",
+        "state_zh": "坐"
+      }
+    ],
+    "yolo26s": [
+      {
+        "bbox_xyxy": [
+          0.132,
+          0.199,
+          30.283,
+          38.507
+        ],
+        "confidence": 0.863622,
+        "class_id": 1,
+        "state": "sit",
+        "state_zh": "坐"
+      }
+    ],
+    "rtdetr_l": [
+      {
+        "bbox_xyxy": [
+          -0.849,
+          -0.845,
+          29.052,
+          38.008
+        ],
+        "confidence": 0.86245,
+        "class_id": 1,
+        "state": "sit",
+        "state_zh": "坐"
+      }
+    ],
+    "rtmdet_s": [
+      {
+        "bbox_xyxy": [
+          0.1477794647216797,
+          0.0,
+          30.720380783081055,
+          39.57408142089844
+        ],
+        "confidence": 0.7984636425971985,
+        "class_id": 1,
+        "state": "sit"
+      }
+    ],
+    "dino": [
+      {
+        "bbox_xyxy": [
+          0.1603841781616211,
+          0.0,
+          30.4176025390625,
+          38.87158966064453
+        ],
+        "confidence": 0.7849286794662476,
+        "class_id": 1,
+        "state": "sit"
+      }
+    ],
+    "faster_rcnn": [
+      {
+        "bbox_xyxy": [
+          0.0,
+          0.3206748962402344,
+          29.600852966308594,
+          37.69925308227539
+        ],
+        "confidence": 0.9896859526634216,
+        "class_id": 1,
+        "state": "sit"
+      }
+    ]
+  }
+}
