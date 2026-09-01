@@ -83,6 +83,7 @@ pixel-aligned with the infrared frame.
 | `one_person` → `two_people` (false positive) | `two_people` → `one_person` (false negative) |
 |---|---|
 | ![error_1_as_2](examples/classification/error_1_as_2.png) | ![error_2_as_1](examples/classification/error_2_as_1.png) |
+| ![error_1_as_2_02](examples/classification/error_1_as_2_02.png) | ![error_2_as_1_02](examples/classification/error_2_as_1_02.png) |
 
 Frame ids, predicted probabilities, and infrared-RGB time offsets are recorded
 in [`examples/classification/metadata.json`](examples/classification/metadata.json).

@@ -126,5 +126,37 @@
     "rgb_dt_ms": 14,
     "rgb_kind": "device_cam",
     "rgb_ok": true
+  },
+  {
+    "name": "error_1_as_2_02",
+    "frame_id": "room10_clean_sub#1761289158182",
+    "scene_id": "room10",
+    "session_id": "room10_clean_sub",
+    "ground_truth": "one_person",
+    "prediction": "two_people",
+    "probability_one_person": 0.002094268798828125,
+    "probability_two_people": 0.998046875,
+    "ir": "room10/room10_clean_sub/ir/1761289158182.png",
+    "rgb": "../rgb/1761289158185.jpg",
+    "rgb_ts_ms": 1761289158185,
+    "rgb_dt_ms": 3,
+    "rgb_kind": "device_cam",
+    "rgb_ok": true
+  },
+  {
+    "name": "error_2_as_1_02",
+    "frame_id": "room10_clean_sub#1761289358623",
+    "scene_id": "room10",
+    "session_id": "room10_clean_sub",
+    "ground_truth": "two_people",
+    "prediction": "one_person",
+    "probability_one_person": 0.99853515625,
+    "probability_two_people": 0.0013303756713867188,
+    "ir": "room10/room10_clean_sub/ir/1761289358623.png",
+    "rgb": "../rgb/1761289358628.jpg",
+    "rgb_ts_ms": 1761289358628,
+    "rgb_dt_ms": 5,
+    "rgb_kind": "device_cam",
+    "rgb_ok": true
   }
 ]
