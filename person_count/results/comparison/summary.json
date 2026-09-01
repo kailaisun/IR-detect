@@ -140,34 +140,6 @@
     "fps_mean": 188.0
   },
   {
-    "model": "efficientnet_b0",
-    "backbone": "efficientnet_b0.ra4_e3600_r224_in1k",
-    "best_epoch": 6,
-    "acc": 0.8061,
-    "bal_acc": 0.803,
-    "macro_f1": 0.7958,
-    "roc_auc_two": 0.8842,
-    "one_prec": 0.8704,
-    "one_rec": 0.8147,
-    "one_f1": 0.8416,
-    "two_prec": 0.7128,
-    "two_rec": 0.7914,
-    "two_f1": 0.7501,
-    "cm": [
-      [
-        6255,
-        1423
-      ],
-      [
-        931,
-        3532
-      ]
-    ],
-    "lat_mean_ms": 22.205,
-    "lat_med_ms": 23.25,
-    "fps_mean": 45.0
-  },
-  {
     "model": "dinov2_vits14",
     "backbone": "vit_small_patch14_dinov2.lvd142m",
     "best_epoch": 7,

@@ -2,7 +2,7 @@
 
 Binary classification of each 80×62 thermal-infrared pseudo-color PNG into
 `one_person` or `two_people`. RGB is never used as model input. This document
-compares seven pretrained backbones under one identical recipe.
+compares six pretrained backbones under one identical recipe.
 
 ## Protocol
 
@@ -24,7 +24,7 @@ compares seven pretrained backbones under one identical recipe.
 - Test decision rule: `argmax` over the two class probabilities. No test-time
   threshold tuning is applied.
 
-All seven runs use this same recipe. The only difference is the pretrained
+All six runs use this same recipe. The only difference is the pretrained
 backbone and its final classification head.
 
 ## Held-out test results
@@ -32,20 +32,19 @@ backbone and its final classification head.
 Test rooms `03`, `10`, and `18` are never seen during training or validation.
 There are 12,141 frames: 7,678 `one_person` and 4,463 `two_people`.
 
-| Backbone | Acc ↑ | Balanced Acc ↑ | Macro F1 ↑ | 1P P | 1P R | 1P F1 | 2P P | 2P R | 2P F1 | ROC-AUC (2P) ↑ | Latency med (ms) ↓ |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Swin-S (IN22k→IN1k) | **0.8467** | **0.8426** | **0.8375** | 0.8952 | 0.8580 | 0.8762 | 0.7721 | **0.8272** | **0.7987** | **0.9240** | 15.74 |
-| ConvNeXt-T | 0.8414 | 0.8286 | 0.8291 | 0.8729 | 0.8768 | 0.8749 | 0.7864 | 0.7804 | 0.7834 | 0.9089 | **5.03** |
-| ConvNeXt-S (IN22k→IN1k) | 0.8421 | 0.8237 | 0.8279 | 0.8622 | **0.8931** | **0.8774** | **0.8040** | 0.7544 | 0.7784 | 0.9079 | 11.46 |
-| Swin-T | 0.8295 | 0.8234 | 0.8190 | 0.8795 | 0.8463 | 0.8626 | 0.7517 | 0.8006 | 0.7754 | 0.9085 | 6.54 |
-| ResNet18 | 0.8165 | 0.8083 | 0.8048 | 0.8664 | 0.8393 | 0.8526 | 0.7376 | 0.7773 | 0.7569 | 0.8922 | 2.79 |
-| EfficientNet-B0 | 0.8061 | 0.8030 | 0.7958 | 0.8704 | 0.8147 | 0.8416 | 0.7128 | 0.7914 | 0.7501 | 0.8842 | 23.25 |
-| DINOv2 ViT-S | 0.7018 | 0.6794 | 0.6794 | 0.7644 | 0.7640 | 0.7642 | 0.5944 | 0.5949 | 0.5946 | 0.7446 | 3.84 |
+| Backbone | Acc ↑ | Balanced Acc ↑ | Macro F1 ↑ | 1P P | 1P R | 1P F1 | 2P P | 2P R | 2P F1 | ROC-AUC (2P) ↑ | Latency med (ms) ↓ | FPS (mean) ↑ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Swin-S (IN22k→IN1k) | **0.8467** | **0.8426** | **0.8375** | 0.8952 | 0.8580 | 0.8762 | 0.7721 | **0.8272** | **0.7987** | **0.9240** | 15.74 | 53.4 |
+| ConvNeXt-T | 0.8414 | 0.8286 | 0.8291 | 0.8729 | 0.8768 | 0.8749 | 0.7864 | 0.7804 | 0.7834 | 0.9089 | **5.03** | 160.3 |
+| ConvNeXt-S (IN22k→IN1k) | 0.8421 | 0.8237 | 0.8279 | 0.8622 | **0.8931** | **0.8774** | **0.8040** | 0.7544 | 0.7784 | 0.9079 | 11.46 | 69.0 |
+| Swin-T | 0.8295 | 0.8234 | 0.8190 | 0.8795 | 0.8463 | 0.8626 | 0.7517 | 0.8006 | 0.7754 | 0.9085 | 6.54 | 120.6 |
+| ResNet18 | 0.8165 | 0.8083 | 0.8048 | 0.8664 | 0.8393 | 0.8526 | 0.7376 | 0.7773 | 0.7569 | 0.8922 | 2.79 | **188.0** |
+| DINOv2 ViT-S | 0.7018 | 0.6794 | 0.6794 | 0.7644 | 0.7640 | 0.7642 | 0.5944 | 0.5949 | 0.5946 | 0.7446 | 3.84 | **195.4** |
 
 `1P`/`2P` are the `one_person`/`two_people` classes. Latency is strict batch-1
 inference on one NVIDIA L40S (letterbox + transfer + forward + softmax; disk
 I/O excluded). Median is reported because the shared machine has CPU noise;
-see `benchmark.json` for mean and p95.
+see `benchmark.json` for mean and p95. FPS is `1000 / mean_latency_ms`.
 
 Confusion matrices (rows are ground truth, columns are prediction):
 
@@ -56,7 +55,6 @@ Confusion matrices (rows are ground truth, columns are prediction):
 | ConvNeXt-S | 6,857 | 821 | 1,096 | 3,367 |
 | Swin-T | 6,498 | 1,180 | 890 | 3,573 |
 | ResNet18 | 6,444 | 1,234 | 994 | 3,469 |
-| EfficientNet-B0 | 6,255 | 1,423 | 931 | 3,532 |
 | DINOv2 ViT-S | 5,866 | 1,812 | 1,808 | 2,655 |
 
 Machine-readable files are in `person_count/results/comparison/`:
@@ -77,16 +75,6 @@ backbone. Each `metrics.json` also carries the full per-class P/R/F1/TP/FP/FN.
    statistics are natural RGB images, and a fixed `lr=3e-4` full fine-tune is
    usually too aggressive for it. It likely needs a lower learning rate or a
    linear-probe-then-fine-tune schedule.
-
-## Why EfficientNet-B0 is slow at batch 1
-
-The latency benchmark is strict batch-1 inference. EfficientNet is built from
-many depthwise-separable convolutions and squeeze-and-excitation blocks, which
-are very efficient in FLOPs but have many small kernels and low GPU occupancy
-at batch size 1. Kernel-launch overhead therefore dominates single-image
-latency even though the model is small. Its FPS is expected to improve
-substantially at normal inference batch sizes; the batch-1 number here is
-only for latency-oriented comparison.
 
 ## Infrared-specific backbones
 
