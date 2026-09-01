@@ -15,6 +15,13 @@
       "frame_id": "room03_cam1#1755152492116",
       "source_file": "room03/room03_cam1/ir/1755152492116.png",
       "visualization": "other_misclassified_as_lie.png",
+      "rgb_reference": {
+        "file": "rgb_other_misclassified_as_lie.jpg",
+        "timestamp_ms": 1755152492391,
+        "delta_ms": 275,
+        "kind": "phone_video",
+        "alignment": "same-side semantic reference; not pixel-aligned"
+      },
       "raw_label": "1_1人|1_人在床上|3_靠躺",
       "ground_truth": {
         "class": "other",
@@ -34,6 +41,13 @@
       "frame_id": "room10_interf_sub#1761295885504",
       "source_file": "room10/room10_interf_sub/ir/1761295885504.png",
       "visualization": "tiny_far_person_below_threshold.png",
+      "rgb_reference": {
+        "file": "rgb_tiny_far_person_below_threshold.jpg",
+        "timestamp_ms": 1761295885498,
+        "delta_ms": 6,
+        "kind": "device_cam",
+        "alignment": "same-device pixel-aligned reference"
+      },
       "condition": "interference source present",
       "ground_truth": [
         {

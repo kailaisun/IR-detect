@@ -114,24 +114,31 @@ negatives, corresponding to 0.590 recall and 0.465 mAP50–95.
 
 ### Reclining `other` classified as `lie`
 
-![Reclining person classified as lie](mmdetection_results/rtmdet_s/failure_cases/other_misclassified_as_lie.png)
+| Annotated infrared prediction | Paired RGB reference |
+|---|---|
+| ![Reclining person classified as lie](mmdetection_results/rtmdet_s/failure_cases/other_misclassified_as_lie.png) | ![RGB reference for the reclining case](mmdetection_results/rtmdet_s/failure_cases/rgb_other_misclassified_as_lie.jpg) |
 
 The raw annotation is `3_靠躺` (reclining), which this benchmark folds into
 `other`. RTMDet-s localizes the person accurately (IoU 0.836) but predicts
 `lie` with 0.832 confidence. Faster R-CNN and DINO make the same classification
 error on this frame. This is a systematic ambiguity at the boundary between
 the `lie` and `other` label definitions rather than a localization failure.
+The RGB frame is a same-side phone-video reference captured 275 ms later; it
+is provided for semantic interpretation and is not pixel-aligned with the IR.
 
 ### Tiny far person filtered by the operating threshold
 
-![Tiny far person below the operating threshold](mmdetection_results/rtmdet_s/failure_cases/tiny_far_person_below_threshold.png)
+| Annotated infrared prediction | Paired RGB reference |
+|---|---|
+| ![Tiny far person below the operating threshold](mmdetection_results/rtmdet_s/failure_cases/tiny_far_person_below_threshold.png) | ![RGB reference showing the two off-bed people](mmdetection_results/rtmdet_s/failure_cases/rgb_tiny_far_person_below_threshold.jpg) |
 
 This interference-condition frame contains two `off_bed` people. The near
 person is retained at 0.466 confidence. The far person is only 2.6 pixels wide;
 RTMDet-s localizes it at IoU 0.582, but its 0.411 confidence is below the 0.438
 reporting threshold and is therefore counted as a false negative at this
 operating point. Lowering the threshold recovers this instance but also raises
-the risk of false detections from background heat sources.
+the risk of false detections from background heat sources. The RGB reference
+comes from the same device 6 ms earlier and is pixel-aligned with the IR frame.
 
 Exact frame identifiers, boxes, scores, IoUs, and the threshold decision are
 stored in [failure-case metadata](mmdetection_results/rtmdet_s/failure_cases/metadata.json).
