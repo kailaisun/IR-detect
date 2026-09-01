@@ -61,6 +61,32 @@ Confusion matrices (rows are ground truth, columns are prediction):
 | ViT-B/16 | 6,608 | 1,070 | 1,118 | 3,345 |
 | DINOv2 ViT-S | 5,866 | 1,812 | 1,808 | 2,655 |
 
+## Qualitative examples (Swin-S, test split)
+
+Each panel shows the infrared model input on the left and the paired RGB
+reference on the right. RGB is shown only for interpretation and is never used
+by the model. All examples are from `room10`, whose RGB is device-camera and
+pixel-aligned with the infrared frame.
+
+### Correct predictions
+
+| `one_person` → `one_person` | `one_person` → `one_person` | `one_person` → `one_person` |
+|---|---|---|
+| ![correct_1_01](examples/classification/correct_1_01.png) | ![correct_1_02](examples/classification/correct_1_02.png) | ![correct_1_03](examples/classification/correct_1_03.png) |
+
+| `two_people` → `two_people` | `two_people` → `two_people` | `two_people` → `two_people` |
+|---|---|---|
+| ![correct_2_01](examples/classification/correct_2_01.png) | ![correct_2_02](examples/classification/correct_2_02.png) | ![correct_2_03](examples/classification/correct_2_03.png) |
+
+### Errors
+
+| `one_person` → `two_people` (false positive) | `two_people` → `one_person` (false negative) |
+|---|---|
+| ![error_1_as_2](examples/classification/error_1_as_2.png) | ![error_2_as_1](examples/classification/error_2_as_1.png) |
+
+Frame ids, predicted probabilities, and infrared-RGB time offsets are recorded
+in [`examples/classification/metadata.json`](examples/classification/metadata.json).
+
 Machine-readable files are in `person_count/results/comparison/`:
 `summary.json`, `summary.csv`, and one `metrics.json` plus `benchmark.json` per
 backbone. Each `metrics.json` also carries the full per-class P/R/F1/TP/FP/FN.
