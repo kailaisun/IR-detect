@@ -1,0 +1,343 @@
+{
+  "task": "person counting by the number of YOLO detection boxes",
+  "model": "early_training/yolo26s_epoch11/weights/model.pt",
+  "model_stage": "YOLO26s epoch 11 non-converged snapshot",
+  "input": "80x62 infrared pseudo-color PNG only",
+  "protocol": {
+    "image_size": 320,
+    "class_agnostic_nms": true,
+    "nms_iou": 0.7,
+    "candidate_confidence": 0.01,
+    "max_detections": 20,
+    "threshold_selection": "validation MAE minimum; ties resolved by exact-count accuracy, MSE, absolute bias, then the higher threshold",
+    "test_set_used_for_threshold_selection": false
+  },
+  "selected_confidence_threshold": 0.21,
+  "validation_at_selected_threshold": {
+    "images": 12454,
+    "mae": 0.3361972057170387,
+    "mse": 0.3708848562710776,
+    "rmse": 0.6090031660599784,
+    "exact_count_accuracy": 0.6806648466356191,
+    "within_one_accuracy": 0.9836197205717039,
+    "mean_error": -0.1097639312670628,
+    "under_count_rate": 0.21567367913923238,
+    "over_count_rate": 0.10366147422514854,
+    "ground_truth_distribution": {
+      "0": 182,
+      "1": 7978,
+      "2": 4293,
+      "3": 1
+    },
+    "prediction_distribution": {
+      "0": 904,
+      "1": 8281,
+      "2": 2915,
+      "3": 328,
+      "4": 25,
+      "5": 1
+    },
+    "confusion_matrix_labels": [
+      "0",
+      "1",
+      "2",
+      "3+"
+    ],
+    "confusion_matrix": [
+      [
+        93,
+        78,
+        8,
+        3
+      ],
+      [
+        721,
+        6328,
+        851,
+        78
+      ],
+      [
+        90,
+        1874,
+        2056,
+        273
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "per_ground_truth_count": {
+      "0": {
+        "images": 182,
+        "mae": 0.5659340659340659,
+        "mse": 0.7527472527472527,
+        "exact_accuracy": 0.510989010989011,
+        "mean_error": 0.5659340659340659
+      },
+      "1": {
+        "images": 7978,
+        "mae": 0.21684632740035095,
+        "mse": 0.23740285785911255,
+        "exact_accuracy": 0.7931812484331913,
+        "mean_error": 0.036099273000752066
+      },
+      "2": {
+        "images": 4293,
+        "mae": 0.5478686233403215,
+        "mse": 0.6019100861868157,
+        "exact_accuracy": 0.4789191707430701,
+        "mean_error": -0.4090379687863965
+      },
+      "3": {
+        "images": 1,
+        "mae": 2.0,
+        "mse": 4.0,
+        "exact_accuracy": 0.0,
+        "mean_error": -2.0
+      }
+    }
+  },
+  "test_at_selected_threshold": {
+    "images": 12237,
+    "mae": 0.3344774045926289,
+    "mse": 0.3684726648688404,
+    "rmse": 0.6070194929891793,
+    "exact_count_accuracy": 0.6815395930375092,
+    "within_one_accuracy": 0.9848819155021655,
+    "mean_error": -0.09896216392906758,
+    "under_count_rate": 0.2095284792024189,
+    "over_count_rate": 0.10893192776007192,
+    "ground_truth_distribution": {
+      "0": 40,
+      "1": 7737,
+      "2": 4460
+    },
+    "prediction_distribution": {
+      "0": 415,
+      "1": 8601,
+      "2": 2842,
+      "3": 356,
+      "4": 22,
+      "5": 1
+    },
+    "confusion_matrix_labels": [
+      "0",
+      "1",
+      "2",
+      "3+"
+    ],
+    "confusion_matrix": [
+      [
+        12,
+        22,
+        5,
+        1
+      ],
+      [
+        315,
+        6418,
+        927,
+        77
+      ],
+      [
+        88,
+        2161,
+        1910,
+        301
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "per_ground_truth_count": {
+      "0": {
+        "images": 40,
+        "mae": 0.875,
+        "mse": 1.275,
+        "exact_accuracy": 0.3,
+        "mean_error": 0.875
+      },
+      "1": {
+        "images": 7737,
+        "mae": 0.18172418249967687,
+        "mse": 0.20705699883675843,
+        "exact_accuracy": 0.8295204859764767,
+        "mean_error": 0.10029727284477187
+      },
+      "2": {
+        "images": 4460,
+        "mae": 0.5946188340807175,
+        "mse": 0.6403587443946188,
+        "exact_accuracy": 0.4282511210762332,
+        "mean_error": -0.4533632286995516
+      }
+    }
+  },
+  "test_at_standard_confidence_0.25": {
+    "images": 12237,
+    "mae": 0.3413418321484024,
+    "mse": 0.3738661436626624,
+    "rmse": 0.611445945004677,
+    "exact_count_accuracy": 0.6747568848573997,
+    "within_one_accuracy": 0.9840647217455258,
+    "mean_error": -0.17757620331780666,
+    "under_count_rate": 0.24752798888616492,
+    "over_count_rate": 0.0777151262564354,
+    "ground_truth_distribution": {
+      "0": 40,
+      "1": 7737,
+      "2": 4460
+    },
+    "prediction_distribution": {
+      "0": 646,
+      "1": 8922,
+      "2": 2450,
+      "3": 214,
+      "4": 5
+    },
+    "confusion_matrix_labels": [
+      "0",
+      "1",
+      "2",
+      "3+"
+    ],
+    "confusion_matrix": [
+      [
+        13,
+        22,
+        4,
+        1
+      ],
+      [
+        487,
+        6504,
+        706,
+        40
+      ],
+      [
+        146,
+        2396,
+        1740,
+        178
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "per_ground_truth_count": {
+      "0": {
+        "images": 40,
+        "mae": 0.825,
+        "mse": 1.175,
+        "exact_accuracy": 0.325,
+        "mean_error": 0.825
+      },
+      "1": {
+        "images": 7737,
+        "mae": 0.16466330619103012,
+        "mse": 0.17552022747835078,
+        "exact_accuracy": 0.8406359053896859,
+        "mean_error": 0.038774718883288095
+      },
+      "2": {
+        "images": 4460,
+        "mae": 0.6434977578475336,
+        "mse": 0.7107623318385651,
+        "exact_accuracy": 0.3901345291479821,
+        "mean_error": -0.5618834080717489
+      }
+    }
+  },
+  "test_majority_count_baseline": {
+    "selection": "most frequent count in the validation split",
+    "predicted_count": 1,
+    "images": 12237,
+    "mae": 0.3677371904878647,
+    "mse": 0.3677371904878647,
+    "rmse": 0.6064133825105319,
+    "exact_count_accuracy": 0.6322628095121353,
+    "within_one_accuracy": 1.0,
+    "mean_error": -0.36119964043474706,
+    "under_count_rate": 0.3644684154613059,
+    "over_count_rate": 0.003268775026558797,
+    "ground_truth_distribution": {
+      "0": 40,
+      "1": 7737,
+      "2": 4460
+    },
+    "prediction_distribution": {
+      "1": 12237
+    },
+    "confusion_matrix_labels": [
+      "0",
+      "1",
+      "2",
+      "3+"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        40,
+        0,
+        0
+      ],
+      [
+        0,
+        7737,
+        0,
+        0
+      ],
+      [
+        0,
+        4460,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "per_ground_truth_count": {
+      "0": {
+        "images": 40,
+        "mae": 1.0,
+        "mse": 1.0,
+        "exact_accuracy": 0.0,
+        "mean_error": 1.0
+      },
+      "1": {
+        "images": 7737,
+        "mae": 0.0,
+        "mse": 0.0,
+        "exact_accuracy": 1.0,
+        "mean_error": 0.0
+      },
+      "2": {
+        "images": 4460,
+        "mae": 1.0,
+        "mse": 1.0,
+        "exact_accuracy": 0.0,
+        "mean_error": -1.0
+      }
+    }
+  },
+  "comparison_vs_majority_count_baseline": {
+    "mae_absolute_reduction": 0.03325978589523576,
+    "mae_relative_reduction": 0.09044444444444444,
+    "mse_absolute_reduction": -0.0007354743809757092,
+    "mse_relative_reduction": -0.001999999999999945,
+    "exact_count_accuracy_gain": 0.0492767835253739
+  }
+}

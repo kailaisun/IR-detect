@@ -19,3 +19,6 @@ early_training/retrain_work_dirs/
 early_training/retrain_logs/
 early_training/**/test_predictions.bbox.json
 early_training/**/test_work_dir/
+person_count/dataset/
+person_count/runs/
+person_count/logs/

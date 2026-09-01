@@ -1,0 +1,62 @@
+{
+  "task": "one-person vs two-people infrared image classification",
+  "split": "test",
+  "rooms": [
+    "room03",
+    "room10",
+    "room18"
+  ],
+  "images": 12141,
+  "model": "resnet18",
+  "checkpoint": "person_count/runs/resnet18_weighted/best.pt",
+  "image_size": 224,
+  "weighted_loss": true,
+  "class_weights": {
+    "one_person": 0.7413057088851929,
+    "two_people": 1.5360301733016968
+  },
+  "best_epoch": 7,
+  "metrics": {
+    "accuracy": 0.8032287290997446,
+    "exact_count_accuracy": 0.8032287290997446,
+    "mae": 0.19677127090025534,
+    "mse": 0.19677127090025534,
+    "rmse": 0.4435890788784766,
+    "mean_error": 0.02215632979161519,
+    "balanced_accuracy": 0.7946998232755946,
+    "macro_precision": 0.788038499131816,
+    "macro_recall": 0.7946998232755946,
+    "macro_f1": 0.7909183181268058,
+    "roc_auc_two_people": 0.8791800306266272,
+    "confusion_matrix": [
+      [
+        6349,
+        1329
+      ],
+      [
+        1060,
+        3403
+      ]
+    ],
+    "per_class": {
+      "one_person": {
+        "precision": 0.8569307598866244,
+        "recall": 0.8269080489710863,
+        "f1": 0.8416517531649764,
+        "support": 7678,
+        "tp": 6349,
+        "fp": 1060,
+        "fn": 1329
+      },
+      "two_people": {
+        "precision": 0.7191462383770076,
+        "recall": 0.7624915975801031,
+        "f1": 0.7401848830886352,
+        "support": 4463,
+        "tp": 3403,
+        "fp": 1329,
+        "fn": 1060
+      }
+    }
+  }
+}
