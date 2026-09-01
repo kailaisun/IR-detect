@@ -1,0 +1,14 @@
+{
+  "device": "NVIDIA L40S",
+  "input": "preloaded 80x62 three-channel IR pseudo-color image",
+  "model_input_size": 224,
+  "batch_size": 1,
+  "frames_per_repeat": 1000,
+  "repeats": 3,
+  "warmup_frames": 100,
+  "latency_ms_mean": 5.320508761467257,
+  "latency_ms_median": 2.7945600013481453,
+  "latency_ms_p95": 19.953938503022073,
+  "fps_from_mean": 187.95195061838902,
+  "scope": "letterbox preprocessing + host-to-device transfer + resnet18 forward + softmax; disk I/O excluded"
+}

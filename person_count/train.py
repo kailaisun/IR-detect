@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import torch
 from torch import nn
 
-from common import CLASS_NAMES, build_loader, build_model, evaluate_model, set_seed
+from common import CLASS_NAMES, DEFAULT_MODEL, build_loader, build_model, evaluate_model, set_seed
 
 
 def parse_args() -> argparse.Namespace:
@@ -33,6 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cache", action="store_true")
     parser.add_argument("--unweighted", action="store_true")
     parser.add_argument("--no-pretrained", action="store_true")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
     return parser.parse_args()
 
 
@@ -59,7 +60,9 @@ def main() -> None:
         args.data / "val.csv", args.dataset_root, args.image_size,
         args.batch_size, args.workers, False, args.cache,
     )
-    model = build_model(pretrained=not args.no_pretrained).to(device)
+    model = build_model(
+        args.model, pretrained=not args.no_pretrained, img_size=args.image_size
+    ).to(device)
     criterion = nn.CrossEntropyLoss(weight=class_weights.to(device))
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay
@@ -96,7 +99,7 @@ def main() -> None:
         history.append(row)
         checkpoint = {
             "model_state": model.state_dict(),
-            "model": "resnet18",
+            "model": args.model,
             "class_names": CLASS_NAMES,
             "image_size": args.image_size,
             "epoch": epoch,

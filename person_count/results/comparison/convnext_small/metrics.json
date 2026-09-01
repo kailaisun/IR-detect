@@ -1,0 +1,62 @@
+{
+  "task": "one-person vs two-people infrared image classification",
+  "split": "test",
+  "rooms": [
+    "room03",
+    "room10",
+    "room18"
+  ],
+  "images": 12141,
+  "model": "convnext_small.fb_in22k_ft_in1k",
+  "checkpoint": "runs/convnext_small/best.pt",
+  "image_size": 224,
+  "weighted_loss": true,
+  "class_weights": {
+    "one_person": 0.7413057088851929,
+    "two_people": 1.5360301733016968
+  },
+  "best_epoch": 13,
+  "metrics": {
+    "accuracy": 0.8421052631578947,
+    "exact_count_accuracy": 0.8421052631578947,
+    "mae": 0.15789473684210525,
+    "mse": 0.15789473684210525,
+    "rmse": 0.39735970711951313,
+    "mean_error": -0.022650523021167945,
+    "balanced_accuracy": 0.823748193373935,
+    "macro_precision": 0.8330770371203025,
+    "macro_recall": 0.823748193373935,
+    "macro_f1": 0.8278831073359796,
+    "roc_auc_two_people": 0.907943840522085,
+    "confusion_matrix": [
+      [
+        6857,
+        821
+      ],
+      [
+        1096,
+        3367
+      ]
+    ],
+    "per_class": {
+      "one_person": {
+        "precision": 0.8621903684144347,
+        "recall": 0.89307111226882,
+        "f1": 0.8773590941078626,
+        "support": 7678,
+        "tp": 6857,
+        "fp": 1096,
+        "fn": 821
+      },
+      "two_people": {
+        "precision": 0.80396370582617,
+        "recall": 0.75442527447905,
+        "f1": 0.7784071205640967,
+        "support": 4463,
+        "tp": 3367,
+        "fp": 821,
+        "fn": 1096
+      }
+    }
+  }
+}

@@ -12,10 +12,16 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 from torchvision.models import ResNet18_Weights, resnet18
 
+try:
+    import timm
+except ImportError:  # pragma: no cover - timm is optional for non-resnet backbones
+    timm = None
+
 
 CLASS_NAMES = ("one_person", "two_people")
 IMAGE_MEAN = (0.485, 0.456, 0.406)
 IMAGE_STD = (0.229, 0.224, 0.225)
+DEFAULT_MODEL = "resnet18"
 
 
 def set_seed(seed: int) -> None:
@@ -117,11 +123,31 @@ def build_loader(
     )
 
 
-def build_model(pretrained: bool = True) -> nn.Module:
-    weights = ResNet18_Weights.IMAGENET1K_V1 if pretrained else None
-    model = resnet18(weights=weights)
-    model.fc = nn.Linear(model.fc.in_features, len(CLASS_NAMES))
-    return model
+def build_model(
+    model_name: str = DEFAULT_MODEL,
+    pretrained: bool = True,
+    img_size: int = 224,
+) -> nn.Module:
+    if model_name == "resnet18":
+        weights = ResNet18_Weights.IMAGENET1K_V1 if pretrained else None
+        model = resnet18(weights=weights)
+        model.fc = nn.Linear(model.fc.in_features, len(CLASS_NAMES))
+        return model
+    if timm is None:
+        raise ImportError("timm is required for non-resnet18 backbones")
+    try:
+        return timm.create_model(
+            model_name,
+            pretrained=pretrained,
+            num_classes=len(CLASS_NAMES),
+            img_size=img_size,
+        )
+    except TypeError:
+        return timm.create_model(
+            model_name,
+            pretrained=pretrained,
+            num_classes=len(CLASS_NAMES),
+        )
 
 
 def binary_auc(labels: np.ndarray, scores: np.ndarray) -> float:

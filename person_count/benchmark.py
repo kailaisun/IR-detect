@@ -13,7 +13,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from common import build_model, build_transform
+from common import DEFAULT_MODEL, build_model, build_transform
 
 
 def parse_args() -> argparse.Namespace:
@@ -27,6 +27,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--warmup", type=int, default=100)
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
     return parser.parse_args()
 
 
@@ -41,7 +42,8 @@ def main() -> None:
         with Image.open(args.dataset_root / rows[index]["image"]) as image:
             frames.append(np.asarray(image.convert("RGB")).copy())
     device = torch.device(args.device)
-    model = build_model(pretrained=False)
+    model_name = checkpoint.get("model", args.model)
+    model = build_model(model_name, pretrained=False, img_size=checkpoint["image_size"])
     model.load_state_dict(checkpoint["model_state"])
     model.to(device).eval()
     transform = build_transform(checkpoint["image_size"], training=False)
@@ -75,7 +77,10 @@ def main() -> None:
         "latency_ms_median": float(np.median(values)),
         "latency_ms_p95": float(np.percentile(values, 95)),
         "fps_from_mean": float(1000.0 / values.mean()),
-        "scope": "letterbox preprocessing + host-to-device transfer + ResNet18 forward + softmax; disk I/O excluded",
+        "scope": (
+            "letterbox preprocessing + host-to-device transfer + "
+            f"{model_name} forward + softmax; disk I/O excluded"
+        ),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n")

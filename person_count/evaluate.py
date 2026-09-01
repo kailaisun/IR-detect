@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
-from common import CLASS_NAMES, build_loader, build_model, evaluate_model
+from common import CLASS_NAMES, DEFAULT_MODEL, build_loader, build_model, evaluate_model
 
 
 def parse_args() -> argparse.Namespace:
@@ -25,6 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--cache", action="store_true")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
     return parser.parse_args()
 
 
@@ -42,7 +43,8 @@ def main() -> None:
     args = parse_args()
     checkpoint = torch.load(args.checkpoint, map_location="cpu")
     device = torch.device(args.device)
-    model = build_model(pretrained=False)
+    model_name = checkpoint.get("model", args.model)
+    model = build_model(model_name, pretrained=False, img_size=checkpoint["image_size"])
     model.load_state_dict(checkpoint["model_state"])
     model.to(device)
     loader = build_loader(
@@ -56,7 +58,7 @@ def main() -> None:
         "split": "test",
         "rooms": manifest["split_rooms"]["test"],
         "images": len(labels),
-        "model": "resnet18",
+        "model": model_name,
         "checkpoint": str(args.checkpoint),
         "image_size": checkpoint["image_size"],
         "weighted_loss": checkpoint["weighted_loss"],

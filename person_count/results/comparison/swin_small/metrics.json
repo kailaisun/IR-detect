@@ -1,0 +1,62 @@
+{
+  "task": "one-person vs two-people infrared image classification",
+  "split": "test",
+  "rooms": [
+    "room03",
+    "room10",
+    "room18"
+  ],
+  "images": 12141,
+  "model": "swin_small_patch4_window7_224.ms_in22k_ft_in1k",
+  "checkpoint": "runs/swin_small/best.pt",
+  "image_size": 224,
+  "weighted_loss": true,
+  "class_weights": {
+    "one_person": 0.7413057088851929,
+    "two_people": 1.5360301733016968
+  },
+  "best_epoch": 8,
+  "metrics": {
+    "accuracy": 0.8467177333003871,
+    "exact_count_accuracy": 0.8467177333003871,
+    "mae": 0.1532822666996129,
+    "mse": 0.1532822666996129,
+    "rmse": 0.39151279251081045,
+    "mean_error": 0.026274606704554813,
+    "balanced_accuracy": 0.8426410968901372,
+    "macro_precision": 0.8336461144975136,
+    "macro_recall": 0.8426410968901372,
+    "macro_f1": 0.8374703062534086,
+    "roc_auc_two_people": 0.9240268032306616,
+    "confusion_matrix": [
+      [
+        6588,
+        1090
+      ],
+      [
+        771,
+        3692
+      ]
+    ],
+    "per_class": {
+      "one_person": {
+        "precision": 0.8952303302079087,
+        "recall": 0.8580359468611618,
+        "f1": 0.8762386114251514,
+        "support": 7678,
+        "tp": 6588,
+        "fp": 771,
+        "fn": 1090
+      },
+      "two_people": {
+        "precision": 0.7720618987871184,
+        "recall": 0.8272462469191127,
+        "f1": 0.7987020010816657,
+        "support": 4463,
+        "tp": 3692,
+        "fp": 1090,
+        "fn": 771
+      }
+    }
+  }
+}
