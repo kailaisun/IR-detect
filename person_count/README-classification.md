@@ -2,7 +2,7 @@
 
 Binary classification of each 80×62 thermal-infrared pseudo-color PNG into
 `one_person` or `two_people`. RGB is never used as model input. This document
-compares six pretrained backbones under one identical recipe.
+compares seven pretrained backbones.
 
 ## Protocol
 
@@ -24,8 +24,10 @@ compares six pretrained backbones under one identical recipe.
 - Test decision rule: `argmax` over the two class probabilities. No test-time
   threshold tuning is applied.
 
-All six runs use this same recipe. The only difference is the pretrained
-backbone and its final classification head.
+All runs use this same recipe. The only difference is the pretrained backbone
+and its final classification head. The one exception is `ViT-B/16`, which is
+reported with `lr=1e-4` because a plain ViT is known to be learning-rate
+sensitive; its `lr=3e-4` run reached only 0.7388 test macro F1.
 
 ## Held-out test results
 
@@ -39,6 +41,7 @@ There are 12,141 frames: 7,678 `one_person` and 4,463 `two_people`.
 | ConvNeXt-S (IN22k→IN1k) | 0.8421 | 0.8237 | 0.8279 | 0.8622 | **0.8931** | **0.8774** | **0.8040** | 0.7544 | 0.7784 | 0.9079 | 11.46 | 69.0 |
 | Swin-T | 0.8295 | 0.8234 | 0.8190 | 0.8795 | 0.8463 | 0.8626 | 0.7517 | 0.8006 | 0.7754 | 0.9085 | 6.54 | 120.6 |
 | ResNet18 | 0.8165 | 0.8083 | 0.8048 | 0.8664 | 0.8393 | 0.8526 | 0.7376 | 0.7773 | 0.7569 | 0.8922 | 2.79 | **188.0** |
+| ViT-B/16 (IN21k→IN1k, lr=1e-4) | 0.8198 | 0.8051 | 0.8058 | 0.8553 | 0.8606 | 0.8580 | 0.7576 | 0.7495 | 0.7535 | 0.8952 | 3.40 | **292.1** |
 | DINOv2 ViT-S | 0.7018 | 0.6794 | 0.6794 | 0.7644 | 0.7640 | 0.7642 | 0.5944 | 0.5949 | 0.5946 | 0.7446 | 3.84 | **195.4** |
 
 `1P`/`2P` are the `one_person`/`two_people` classes. Latency is strict batch-1
@@ -55,6 +58,7 @@ Confusion matrices (rows are ground truth, columns are prediction):
 | ConvNeXt-S | 6,857 | 821 | 1,096 | 3,367 |
 | Swin-T | 6,498 | 1,180 | 890 | 3,573 |
 | ResNet18 | 6,444 | 1,234 | 994 | 3,469 |
+| ViT-B/16 | 6,608 | 1,070 | 1,118 | 3,345 |
 | DINOv2 ViT-S | 5,866 | 1,812 | 1,808 | 2,655 |
 
 Machine-readable files are in `person_count/results/comparison/`:
@@ -75,6 +79,10 @@ backbone. Each `metrics.json` also carries the full per-class P/R/F1/TP/FP/FN.
    statistics are natural RGB images, and a fixed `lr=3e-4` full fine-tune is
    usually too aggressive for it. It likely needs a lower learning rate or a
    linear-probe-then-fine-tune schedule.
+5. **ViT-B/16 is competitive only with a lower learning rate.** At `lr=1e-4`
+   it matches ResNet18 (macro F1 0.8058 vs 0.8048) but does not beat
+   ConvNeXt/Swin. Its `lr=3e-4` run is much worse (macro F1 0.7388), so the
+   lower learning rate is reported here.
 
 ## Infrared-specific backbones
 

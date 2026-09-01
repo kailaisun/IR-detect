@@ -3,6 +3,7 @@
     "model": "swin_small",
     "backbone": "swin_small_patch4_window7_224.ms_in22k_ft_in1k",
     "best_epoch": 8,
+    "learning_rate": 0.0003,
     "acc": 0.8467,
     "bal_acc": 0.8426,
     "macro_f1": 0.8375,
@@ -31,6 +32,7 @@
     "model": "convnext_tiny",
     "backbone": "convnext_tiny.fb_in1k",
     "best_epoch": 11,
+    "learning_rate": 0.0003,
     "acc": 0.8414,
     "bal_acc": 0.8286,
     "macro_f1": 0.8291,
@@ -59,6 +61,7 @@
     "model": "convnext_small",
     "backbone": "convnext_small.fb_in22k_ft_in1k",
     "best_epoch": 13,
+    "learning_rate": 0.0003,
     "acc": 0.8421,
     "bal_acc": 0.8237,
     "macro_f1": 0.8279,
@@ -87,6 +90,7 @@
     "model": "swin_tiny",
     "backbone": "swin_tiny_patch4_window7_224.ms_in1k",
     "best_epoch": 11,
+    "learning_rate": 0.0003,
     "acc": 0.8295,
     "bal_acc": 0.8234,
     "macro_f1": 0.819,
@@ -112,9 +116,39 @@
     "fps_mean": 120.6
   },
   {
+    "model": "vit_b16_in21k_lr1e4",
+    "backbone": "vit_base_patch16_224.augreg_in21k_ft_in1k",
+    "best_epoch": 11,
+    "learning_rate": 0.0001,
+    "acc": 0.8198,
+    "bal_acc": 0.8051,
+    "macro_f1": 0.8058,
+    "roc_auc_two": 0.8952,
+    "one_prec": 0.8553,
+    "one_rec": 0.8606,
+    "one_f1": 0.858,
+    "two_prec": 0.7576,
+    "two_rec": 0.7495,
+    "two_f1": 0.7535,
+    "cm": [
+      [
+        6608,
+        1070
+      ],
+      [
+        1118,
+        3345
+      ]
+    ],
+    "lat_mean_ms": 3.423,
+    "lat_med_ms": 3.395,
+    "fps_mean": 292.1
+  },
+  {
     "model": "resnet18_b256",
     "backbone": "resnet18",
     "best_epoch": 11,
+    "learning_rate": 0.0003,
     "acc": 0.8165,
     "bal_acc": 0.8083,
     "macro_f1": 0.8048,
@@ -143,6 +177,7 @@
     "model": "dinov2_vits14",
     "backbone": "vit_small_patch14_dinov2.lvd142m",
     "best_epoch": 7,
+    "learning_rate": 0.0003,
     "acc": 0.7018,
     "bal_acc": 0.6794,
     "macro_f1": 0.6794,

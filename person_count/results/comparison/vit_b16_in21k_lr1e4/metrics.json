@@ -1,0 +1,62 @@
+{
+  "task": "one-person vs two-people infrared image classification",
+  "split": "test",
+  "rooms": [
+    "room03",
+    "room10",
+    "room18"
+  ],
+  "images": 12141,
+  "model": "vit_base_patch16_224.augreg_in21k_ft_in1k",
+  "checkpoint": "runs/vit_b16_in21k_lr1e4/best.pt",
+  "image_size": 224,
+  "weighted_loss": true,
+  "class_weights": {
+    "one_person": 0.7413057088851929,
+    "two_people": 1.5360301733016968
+  },
+  "best_epoch": 11,
+  "metrics": {
+    "accuracy": 0.819784202289762,
+    "exact_count_accuracy": 0.819784202289762,
+    "mae": 0.18021579771023805,
+    "mse": 0.18021579771023805,
+    "rmse": 0.42451831257348377,
+    "mean_error": -0.003953545836422041,
+    "balanced_accuracy": 0.8050683233395339,
+    "macro_precision": 0.8064691036048066,
+    "macro_recall": 0.8050683233395339,
+    "macro_f1": 0.8057535340568879,
+    "roc_auc_two_people": 0.895234802877201,
+    "confusion_matrix": [
+      [
+        6608,
+        1070
+      ],
+      [
+        1118,
+        3345
+      ]
+    ],
+    "per_class": {
+      "one_person": {
+        "precision": 0.8552938130986281,
+        "recall": 0.8606407918728836,
+        "f1": 0.8579589716956635,
+        "support": 7678,
+        "tp": 6608,
+        "fp": 1118,
+        "fn": 1070
+      },
+      "two_people": {
+        "precision": 0.7576443941109853,
+        "recall": 0.7494958548061842,
+        "f1": 0.7535480964181123,
+        "support": 4463,
+        "tp": 3345,
+        "fp": 1070,
+        "fn": 1118
+      }
+    }
+  }
+}
