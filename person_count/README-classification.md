@@ -65,8 +65,10 @@ Confusion matrices (rows are ground truth, columns are prediction):
 
 Each panel shows the infrared model input on the left and the paired RGB
 reference on the right. RGB is shown only for interpretation and is never used
-by the model. All examples are from `room10`, whose RGB is device-camera and
-pixel-aligned with the infrared frame.
+by the model. The `room10` examples use device-camera RGB that is pixel-aligned
+with the infrared frame. The `room03` / `room18` examples use cleaned or
+cropped phone RGB as a semantic reference; those are from a different viewpoint
+and are not pixel-aligned.
 
 ### Correct predictions
 
@@ -78,12 +80,19 @@ pixel-aligned with the infrared frame.
 |---|---|---|
 | ![correct_2_01](examples/classification/correct_2_01.png) | ![correct_2_02](examples/classification/correct_2_02.png) | ![correct_2_03](examples/classification/correct_2_03.png) |
 
+Additional correct examples from the phone-RGB scenes:
+
+| `one_person` → `one_person` | `one_person` → `one_person` | `two_people` → `two_people` | `two_people` → `two_people` |
+|---|---|---|---|
+| ![correct_1_room03](examples/classification/correct_1_room03.png) | ![correct_1_room18](examples/classification/correct_1_room18.png) | ![correct_2_room03](examples/classification/correct_2_room03.png) | ![correct_2_room18](examples/classification/correct_2_room18.png) |
+
 ### Errors
 
 | `one_person` → `two_people` (false positive) | `two_people` → `one_person` (false negative) |
 |---|---|
 | ![error_1_as_2](examples/classification/error_1_as_2.png) | ![error_2_as_1](examples/classification/error_2_as_1.png) |
 | ![error_1_as_2_02](examples/classification/error_1_as_2_02.png) | ![error_2_as_1_02](examples/classification/error_2_as_1_02.png) |
+| ![error_1_as_2_room18](examples/classification/error_1_as_2_room18.png) | ![error_2_as_1_room03](examples/classification/error_2_as_1_room03.png) |
 
 Frame ids, predicted probabilities, and infrared-RGB time offsets are recorded
 in [`examples/classification/metadata.json`](examples/classification/metadata.json).
