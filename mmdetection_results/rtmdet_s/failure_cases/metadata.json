@@ -1,0 +1,71 @@
+{
+  "model": "RTMDet-s",
+  "checkpoint": "mmdetection_results/rtmdet_s/weights/best.pth",
+  "split": "scene-disjoint test rooms 03, 10, and 18",
+  "image_modality": "80x62 infrared pseudo-color PNG only",
+  "operating_point": {
+    "iou_threshold": 0.5,
+    "confidence_threshold": 0.438,
+    "selection": "single confidence threshold maximizing macro class F1"
+  },
+  "cases": [
+    {
+      "name": "reclining_other_misclassified_as_lie",
+      "image_id": 1242,
+      "frame_id": "room03_cam1#1755152492116",
+      "source_file": "room03/room03_cam1/ir/1755152492116.png",
+      "visualization": "other_misclassified_as_lie.png",
+      "raw_label": "1_1人|1_人在床上|3_靠躺",
+      "ground_truth": {
+        "class": "other",
+        "bbox_xywh": [16.283, 6.715, 57.298, 34.916]
+      },
+      "prediction": {
+        "class": "lie",
+        "confidence": 0.8319,
+        "bbox_xywh": [11.172, 7.916, 59.888, 33.12],
+        "iou_with_ground_truth": 0.836
+      },
+      "interpretation": "Localization is accurate, but the benchmark maps the visually ambiguous reclining label to other while the model predicts lie. Faster R-CNN and DINO make the same state error on this frame."
+    },
+    {
+      "name": "tiny_far_person_below_operating_threshold",
+      "image_id": 8204,
+      "frame_id": "room10_interf_sub#1761295885504",
+      "source_file": "room10/room10_interf_sub/ir/1761295885504.png",
+      "visualization": "tiny_far_person_below_threshold.png",
+      "condition": "interference source present",
+      "ground_truth": [
+        {
+          "class": "off_bed",
+          "role": "near person",
+          "bbox_xywh": [35.967, 13.248, 8.447, 24.293]
+        },
+        {
+          "class": "off_bed",
+          "role": "far person",
+          "bbox_xywh": [29.176, 13.509, 2.612, 14.803]
+        }
+      ],
+      "predictions": [
+        {
+          "class": "off_bed",
+          "role": "near person",
+          "confidence": 0.4656,
+          "bbox_xywh": [35.46, 12.513, 10.871, 20.883],
+          "iou_with_ground_truth": 0.65,
+          "kept_at_operating_point": true
+        },
+        {
+          "class": "off_bed",
+          "role": "far person",
+          "confidence": 0.4111,
+          "bbox_xywh": [28.623, 12.751, 3.987, 14.153],
+          "iou_with_ground_truth": 0.582,
+          "kept_at_operating_point": false
+        }
+      ],
+      "interpretation": "The far person is only 2.6 pixels wide. RTMDet-s localizes it at IoU 0.582, but its confidence falls below the published 0.438 operating threshold, so it is counted as a false negative at that operating point."
+    }
+  ]
+}
