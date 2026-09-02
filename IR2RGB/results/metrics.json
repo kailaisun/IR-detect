@@ -2,6 +2,58 @@
   "images": 7505,
   "psnr": 18.5904,
   "ssim": 0.7001,
+  "ms_ssim": 0.7847,
+  "mae": 0.0617,
+  "rmse": 0.1179,
   "lpips": 0.1828,
-  "fid": 28.9149
+  "deltaE_ciede2000": 6.7026,
+  "fid": 28.8552,
+  "kid": 0.015888,
+  "per_scene": {
+    "room04": {
+      "images": 193,
+      "psnr": 18.3463,
+      "ssim": 0.6433
+    },
+    "room05": {
+      "images": 1038,
+      "psnr": 18.2834,
+      "ssim": 0.63
+    },
+    "room06": {
+      "images": 888,
+      "psnr": 20.2043,
+      "ssim": 0.7454
+    },
+    "room07": {
+      "images": 893,
+      "psnr": 19.1096,
+      "ssim": 0.7147
+    },
+    "room08": {
+      "images": 753,
+      "psnr": 20.7516,
+      "ssim": 0.7062
+    },
+    "room09": {
+      "images": 1104,
+      "psnr": 19.8292,
+      "ssim": 0.703
+    },
+    "room10": {
+      "images": 988,
+      "psnr": 20.5483,
+      "ssim": 0.7338
+    },
+    "room11": {
+      "images": 987,
+      "psnr": 18.7737,
+      "ssim": 0.6485
+    },
+    "room12": {
+      "images": 661,
+      "psnr": 20.7685,
+      "ssim": 0.7606
+    }
+  }
 }

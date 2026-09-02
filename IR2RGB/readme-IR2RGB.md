@@ -66,10 +66,17 @@ All metrics are computed on the untouched test split (7,505 pairs).
 - **PSNR**: mean squared error on `[0, 1]` 256x192 images.
 - **SSIM**: `skimage.metrics.structural_similarity` on uint8 images,
   `data_range=255`, RGB (`channel_axis=2`), averaged over images.
+- **MS-SSIM**: multi-scale SSIM via `pytorch-msssim`.
+- **MAE / RMSE**: per-pixel mean absolute error and root mean squared error
+  on `[0, 1]`.
 - **LPIPS**: `lpips` AlexNet backbone.
+- **Delta E (CIEDE2000)**: mean per-pixel color difference between the
+  generated and real RGB in CIELAB space.
 - **FID**: InceptionV3 `pool3` features (2048-d), images resized to 299x299
   with ImageNet normalization; Frechet distance between real and generated
   feature distributions.
+- **KID**: Kernel Inception Distance on the same InceptionV3 `pool3` features
+  (polynomial kernel, degree 3, 100 subsets of size 1000).
 
 ## 6. Results
 
@@ -77,12 +84,32 @@ All metrics are computed on the untouched test split (7,505 pairs).
 |---|---:|
 | PSNR (dB) ↑ | 18.59 |
 | SSIM ↑ | 0.7001 |
+| MS-SSIM ↑ | 0.7847 |
+| MAE ↓ | 0.0617 |
+| RMSE ↓ | 0.1179 |
 | LPIPS ↓ | 0.1828 |
-| FID ↓ | 28.91 |
+| Delta E (CIEDE2000) ↓ | 6.7026 |
+| FID ↓ | 28.8552 |
+| KID ↓ | 0.0159 |
 
 Interpretation: structure and layout are captured reasonably (SSIM 0.70,
-LPIPS 0.18), while exact colors remain uncertain, which is expected for this
-ill-posed thermal-to-visible mapping and keeps PSNR/FID modest.
+MS-SSIM 0.78, LPIPS 0.18), while exact colors remain uncertain, which is
+expected for this ill-posed thermal-to-visible mapping and keeps PSNR / FID
+modest.
+
+Per-scene PSNR / SSIM (the split is random, so scene sizes differ):
+
+| Scene | Images | PSNR ↑ | SSIM ↑ |
+|---|---:|---:|---:|
+| room04 | 193 | 18.35 | 0.6433 |
+| room05 | 1,038 | 18.28 | 0.6300 |
+| room06 | 888 | 20.20 | 0.7454 |
+| room07 | 893 | 19.11 | 0.7147 |
+| room08 | 753 | 20.75 | 0.7062 |
+| room09 | 1,104 | 19.83 | 0.7030 |
+| room10 | 988 | 20.55 | 0.7338 |
+| room11 | 987 | 18.77 | 0.6485 |
+| room12 | 661 | 20.77 | 0.7606 |
 
 Machine-readable metrics: `IR2RGB/results/metrics.json`.
 
