@@ -12,7 +12,7 @@ images; the other four models use the same 1,000-image subset.
 | Model | PSNR ↑ | SSIM ↑ | MS-SSIM ↑ | MAE ↓ | RMSE ↓ | LPIPS ↓ | ΔE ↓ | FID ↓ | KID ↓ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Pix2Pix | 18.59 | 0.7001 | 0.7847 | 0.0617 | 0.1179 | 0.1828 | 6.70 | 28.86 | 0.0159 |
-| NAFNet (epoch 28) | 15.80 | 0.4256 | 0.4997 | 0.1145 | 0.1677 | 0.5512 | 11.37 | 270.35 | 0.2886 |
+| NAFNet (epoch 33) | 16.03 | 0.4369 | 0.5115 | 0.1104 | 0.1634 | 0.5401 | 10.96 | 265.59 | 0.2809 |
 | SDXL ControlNet | 10.52 | 0.3983 | 0.1855 | 0.2374 | 0.3016 | 0.7011 | 22.83 | 68.79 | 0.0383 |
 | ControlNet SD1.5 | 10.22 | 0.3334 | 0.2066 | 0.2517 | 0.3237 | 0.7375 | 24.22 | 78.28 | 0.0384 |
 | Palette (simple DDPM) | 7.83 | 0.1371 | 0.1291 | 0.3374 | 0.4225 | 0.7609 | 36.21 | 229.05 | 0.2037 |
@@ -20,8 +20,8 @@ images; the other four models use the same 1,000-image subset.
 Machine-readable full metrics are in `results/summary_full.json` and
 `results/<model>/metrics.json`.
 
-NAFNet is still training (100 epochs); its number above is from the current
-best checkpoint at epoch 28 and will be updated when training finishes.
+NAFNet was stopped at epoch 33 after its training L1 plateaued (~0.22); the
+number above is final.
 
 ### Important note on diffusion models
 

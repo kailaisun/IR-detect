@@ -61,15 +61,15 @@
   "nafnet": {
     "model": "nafnet",
     "images": 1000,
-    "psnr": 15.8015,
-    "ssim": 0.4256,
-    "ms_ssim": 0.4997,
-    "mae": 0.1145,
-    "rmse": 0.1677,
-    "lpips": 0.5512,
-    "deltaE_ciede2000": 11.3748,
-    "fid": 270.3482,
-    "kid": 0.288593
+    "psnr": 16.0331,
+    "ssim": 0.4369,
+    "ms_ssim": 0.5115,
+    "mae": 0.1104,
+    "rmse": 0.1634,
+    "lpips": 0.5401,
+    "deltaE_ciede2000": 10.9647,
+    "fid": 265.5887,
+    "kid": 0.280937
   },
   "controlnet_sd15": {
     "model": "controlnet",
