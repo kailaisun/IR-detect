@@ -1,0 +1,7 @@
+{
+  "images": 500,
+  "ddim_steps": 50,
+  "psnr": 7.8547,
+  "ssim": 0.1397,
+  "lpips": 0.7635
+}

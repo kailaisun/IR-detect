@@ -1,0 +1,7 @@
+{
+  "images": 1000,
+  "inference_steps": 20,
+  "psnr": 10.5403,
+  "ssim": 0.367,
+  "lpips": 0.7027
+}
