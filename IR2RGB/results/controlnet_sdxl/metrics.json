@@ -1,7 +1,13 @@
 {
+  "model": "controlnet_sdxl",
   "images": 1000,
-  "inference_steps": 20,
-  "psnr": 10.6238,
-  "ssim": 0.4163,
-  "lpips": 0.6893
+  "psnr": 10.5219,
+  "ssim": 0.3983,
+  "ms_ssim": 0.1855,
+  "mae": 0.2374,
+  "rmse": 0.3016,
+  "lpips": 0.7011,
+  "deltaE_ciede2000": 22.8288,
+  "fid": 68.7926,
+  "kid": 0.038344
 }

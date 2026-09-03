@@ -6,19 +6,21 @@ pseudo-color image. All models are trained on the same room04-room12 pairs
 
 ## Results
 
-| Model | Family | PSNR ↑ | SSIM ↑ | LPIPS ↓ | Eval set |
-|---|---|---:|---:|---:|---|
-| Pix2Pix | GAN (regression) | 18.59 | 0.7001 | 0.1828 | 7,505 |
-| NAFNet (epoch 28) | CNN restoration | 15.80 | 0.4267 | 0.5512 | 1,000 |
-| SDXL ControlNet | pretrained diffusion | 10.62 | 0.4163 | 0.6893 | 1,000 |
-| ControlNet SD1.5 | pretrained diffusion | 10.54 | 0.3670 | 0.7027 | 1,000 |
-| Palette (simple DDPM) | diffusion from scratch | 7.85 | 0.1397 | 0.7635 | 500 |
+All metrics are on the held-out test split. Pix2Pix uses all 7,505 test
+images; the other four models use the same 1,000-image subset.
 
-Pix2Pix full-suite metrics are in `results/metrics.json` (PSNR 18.59,
-SSIM 0.7001, MS-SSIM 0.7847, MAE 0.0617, RMSE 0.1179, LPIPS 0.1828,
-Delta E 6.7026, FID 28.8552, KID 0.0159).
+| Model | PSNR ↑ | SSIM ↑ | MS-SSIM ↑ | MAE ↓ | RMSE ↓ | LPIPS ↓ | ΔE ↓ | FID ↓ | KID ↓ |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Pix2Pix | 18.59 | 0.7001 | 0.7847 | 0.0617 | 0.1179 | 0.1828 | 6.70 | 28.86 | 0.0159 |
+| NAFNet (epoch 28) | 15.80 | 0.4256 | 0.4997 | 0.1145 | 0.1677 | 0.5512 | 11.37 | 270.35 | 0.2886 |
+| SDXL ControlNet | 10.52 | 0.3983 | 0.1855 | 0.2374 | 0.3016 | 0.7011 | 22.83 | 68.79 | 0.0383 |
+| ControlNet SD1.5 | 10.22 | 0.3334 | 0.2066 | 0.2517 | 0.3237 | 0.7375 | 24.22 | 78.28 | 0.0384 |
+| Palette (simple DDPM) | 7.83 | 0.1371 | 0.1291 | 0.3374 | 0.4225 | 0.7609 | 36.21 | 229.05 | 0.2037 |
 
-NAFNet is still training (100 epochs); the number above is from its current
+Machine-readable full metrics are in `results/summary_full.json` and
+`results/<model>/metrics.json`.
+
+NAFNet is still training (100 epochs); its number above is from the current
 best checkpoint at epoch 28 and will be updated when training finishes.
 
 ### Important note on diffusion models

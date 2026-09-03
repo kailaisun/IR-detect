@@ -1,0 +1,113 @@
+{
+  "pix2pix": {
+    "images": 7505,
+    "psnr": 18.5904,
+    "ssim": 0.7001,
+    "ms_ssim": 0.7847,
+    "mae": 0.0617,
+    "rmse": 0.1179,
+    "lpips": 0.1828,
+    "deltaE_ciede2000": 6.7026,
+    "fid": 28.8552,
+    "kid": 0.015888,
+    "per_scene": {
+      "room04": {
+        "images": 193,
+        "psnr": 18.3463,
+        "ssim": 0.6433
+      },
+      "room05": {
+        "images": 1038,
+        "psnr": 18.2834,
+        "ssim": 0.63
+      },
+      "room06": {
+        "images": 888,
+        "psnr": 20.2043,
+        "ssim": 0.7454
+      },
+      "room07": {
+        "images": 893,
+        "psnr": 19.1096,
+        "ssim": 0.7147
+      },
+      "room08": {
+        "images": 753,
+        "psnr": 20.7516,
+        "ssim": 0.7062
+      },
+      "room09": {
+        "images": 1104,
+        "psnr": 19.8292,
+        "ssim": 0.703
+      },
+      "room10": {
+        "images": 988,
+        "psnr": 20.5483,
+        "ssim": 0.7338
+      },
+      "room11": {
+        "images": 987,
+        "psnr": 18.7737,
+        "ssim": 0.6485
+      },
+      "room12": {
+        "images": 661,
+        "psnr": 20.7685,
+        "ssim": 0.7606
+      }
+    }
+  },
+  "nafnet": {
+    "model": "nafnet",
+    "images": 1000,
+    "psnr": 15.8015,
+    "ssim": 0.4256,
+    "ms_ssim": 0.4997,
+    "mae": 0.1145,
+    "rmse": 0.1677,
+    "lpips": 0.5512,
+    "deltaE_ciede2000": 11.3748,
+    "fid": 270.3482,
+    "kid": 0.288593
+  },
+  "controlnet_sd15": {
+    "model": "controlnet",
+    "images": 1000,
+    "psnr": 10.2248,
+    "ssim": 0.3334,
+    "ms_ssim": 0.2066,
+    "mae": 0.2517,
+    "rmse": 0.3237,
+    "lpips": 0.7375,
+    "deltaE_ciede2000": 24.2204,
+    "fid": 78.2783,
+    "kid": 0.038382
+  },
+  "controlnet_sdxl": {
+    "model": "controlnet_sdxl",
+    "images": 1000,
+    "psnr": 10.5219,
+    "ssim": 0.3983,
+    "ms_ssim": 0.1855,
+    "mae": 0.2374,
+    "rmse": 0.3016,
+    "lpips": 0.7011,
+    "deltaE_ciede2000": 22.8288,
+    "fid": 68.7926,
+    "kid": 0.038344
+  },
+  "palette": {
+    "model": "palette",
+    "images": 1000,
+    "psnr": 7.8312,
+    "ssim": 0.1371,
+    "ms_ssim": 0.1291,
+    "mae": 0.3374,
+    "rmse": 0.4225,
+    "lpips": 0.7609,
+    "deltaE_ciede2000": 36.2109,
+    "fid": 229.0466,
+    "kid": 0.203675
+  }
+}

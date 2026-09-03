@@ -1,7 +1,13 @@
 {
+  "model": "controlnet",
   "images": 1000,
-  "inference_steps": 20,
-  "psnr": 10.5403,
-  "ssim": 0.367,
-  "lpips": 0.7027
+  "psnr": 10.2248,
+  "ssim": 0.3334,
+  "ms_ssim": 0.2066,
+  "mae": 0.2517,
+  "rmse": 0.3237,
+  "lpips": 0.7375,
+  "deltaE_ciede2000": 24.2204,
+  "fid": 78.2783,
+  "kid": 0.038382
 }

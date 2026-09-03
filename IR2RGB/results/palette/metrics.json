@@ -1,7 +1,13 @@
 {
-  "images": 500,
-  "ddim_steps": 50,
-  "psnr": 7.8547,
-  "ssim": 0.1397,
-  "lpips": 0.7635
+  "model": "palette",
+  "images": 1000,
+  "psnr": 7.8312,
+  "ssim": 0.1371,
+  "ms_ssim": 0.1291,
+  "mae": 0.3374,
+  "rmse": 0.4225,
+  "lpips": 0.7609,
+  "deltaE_ciede2000": 36.2109,
+  "fid": 229.0466,
+  "kid": 0.203675
 }
