@@ -32,116 +32,154 @@ Training logs are in `runs/logs`.
 ## Metrics
 
 All numbers are computed on the untouched `test.csv` split (7,505 frames).
-Machine-readable JSON is in `results/metrics_*.json`; the evaluator is
-`evaluate_full.py`.
+Machine-readable JSON is in `results/metrics_*.json`.
 
-**Metric definitions**
+- Thermal field: temperature MAE / RMSE / pooled R^2 are computed in native
+  Celsius on the `(62, 80)` field.
+- Pseudo-color image quality: PSNR / SSIM / LPIPS. Direct methods are compared
+  against the camera pseudo-color PNG; thermal-field methods are rendered with
+  the Inferno colormap (fixed `15-35 degC`) and compared against the same
+  rendering of the ground-truth field.
 
-- Thermal field (`thermal` / `relative`): temperature MAE, RMSE, and pooled
-  R^2 are computed in native Celsius on the `(62, 80)` field; PSNR / SSIM /
-  LPIPS are computed on an Inferno colormap rendering with a fixed
-  `15-35 degC` range.
-- Pseudo-color (`pseudo`): PSNR / SSIM / LPIPS are computed on the 3-channel
-  pseudo-color RGB image.
+> Status: Palette DDPM and BicycleGAN are evaluated from their current
+> checkpoints (Palette ~92% of steps, BicycleGAN epoch 82/100), so their rows
+> are preliminary. Palette DDPM uses DDIM-100 sampling.
 
 ### Thermal field accuracy (global)
 
-| Method | Temp MAE (degC) ↓ | Temp RMSE (degC) ↓ | R^2 ↑ | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
-|---|---:|---:|---:|---:|---:|---:|
-| U-Net | 0.654 | 0.860 | 0.923 | 26.754 | 0.616 | 0.176 |
-| Pix2Pix | 0.753 | 1.000 | 0.896 | 25.519 | 0.572 | 0.068 |
-| ThermalGAN-style | 0.726 | 0.957 | 0.905 | 25.853 | 0.582 | 0.063 |
+| Method | Temp MAE (degC) ↓ | Temp RMSE (degC) ↓ | R^2 ↑ |
+|---|---:|---:|---:|
+| U-Net | 0.654 | 0.860 | 0.923 |
+| Pix2Pix | 0.753 | 1.000 | 0.896 |
+| ThermalGAN-style | 0.726 | 0.957 | 0.905 |
+| Palette DDPM | 2.236 | 2.892 | 0.134 |
 
-### Pseudo-color synthesis (global)
+### Pseudo-color image quality (global)
+
+**Direct RGB synthesis** (compared to the camera pseudo-color PNG)
 
 | Method | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
 |---|---:|---:|---:|
 | U-Net | 23.379 | 0.861 | 0.104 |
+| BicycleGAN | 20.343 | 0.780 | 0.182 |
+| Palette DDPM | 14.683 | 0.624 | 0.316 |
 | Pix2Pix | 8.761 | 0.038 | 0.630 |
 
-> Pix2Pix pseudo-color collapsed to near-black output. Those numbers reflect
-> the collapsed model; it is being retrained with an LSGAN objective
-> (`train_pix2pix.py --gan-loss lsgan`) and will be updated.
+> Pix2Pix direct pseudo-color collapsed to near-black output.
+
+**Via thermal field** (render predicted field with Inferno)
+
+| Method | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
+|---|---:|---:|---:|
+| U-Net | 26.754 | 0.616 | 0.176 |
+| Pix2Pix | 25.519 | 0.572 | 0.068 |
+| ThermalGAN-style | 25.853 | 0.582 | 0.063 |
+| Palette DDPM | 18.752 | 0.466 | 0.166 |
 
 ### Per-scene thermal field
 
-**Temperature MAE (degC, lower is better)**
+**Temperature MAE (degC), lower is better**
 
-| Scene | U-Net | Pix2Pix | ThermalGAN-style |
-|---|---:|---:|---:|
-| room04 | 0.700 | 0.789 | 0.772 |
-| room05 | 0.672 | 0.781 | 0.748 |
-| room06 | 0.634 | 0.734 | 0.705 |
-| room07 | 0.644 | 0.735 | 0.714 |
-| room08 | 0.635 | 0.727 | 0.705 |
-| room09 | 0.656 | 0.750 | 0.728 |
-| room10 | 0.649 | 0.747 | 0.721 |
-| room11 | 0.670 | 0.777 | 0.746 |
-| room12 | 0.653 | 0.750 | 0.726 |
+| Scene | U-Net | Pix2Pix | ThermalGAN-style | Palette DDPM |
+|---|---|---|---|---|
+| room04 | 0.700 | 0.789 | 0.772 | 2.277 |
+| room05 | 0.672 | 0.781 | 0.748 | 1.787 |
+| room06 | 0.634 | 0.734 | 0.705 | 1.936 |
+| room07 | 0.644 | 0.735 | 0.714 | 2.035 |
+| room08 | 0.635 | 0.727 | 0.705 | 1.681 |
+| room09 | 0.656 | 0.750 | 0.728 | 3.084 |
+| room10 | 0.649 | 0.747 | 0.721 | 3.041 |
+| room11 | 0.670 | 0.777 | 0.746 | 1.961 |
+| room12 | 0.653 | 0.750 | 0.726 | 2.024 |
 
-**Temperature RMSE (degC, lower is better)**
+**Temperature RMSE (degC), lower is better**
 
-| Scene | U-Net | Pix2Pix | ThermalGAN-style |
-|---|---:|---:|---:|
-| room04 | 0.933 | 1.051 | 1.026 |
-| room05 | 0.879 | 1.035 | 0.981 |
-| room06 | 0.824 | 0.968 | 0.921 |
-| room07 | 0.860 | 0.982 | 0.951 |
-| room08 | 0.832 | 0.963 | 0.926 |
-| room09 | 0.860 | 0.996 | 0.957 |
-| room10 | 0.854 | 0.991 | 0.948 |
-| room11 | 0.887 | 1.042 | 0.988 |
-| room12 | 0.855 | 0.989 | 0.953 |
+| Scene | U-Net | Pix2Pix | ThermalGAN-style | Palette DDPM |
+|---|---|---|---|---|
+| room04 | 0.933 | 1.051 | 1.026 | 2.900 |
+| room05 | 0.879 | 1.035 | 0.981 | 2.289 |
+| room06 | 0.824 | 0.968 | 0.921 | 2.463 |
+| room07 | 0.860 | 0.982 | 0.951 | 2.729 |
+| room08 | 0.832 | 0.963 | 0.926 | 2.178 |
+| room09 | 0.860 | 0.996 | 0.957 | 3.789 |
+| room10 | 0.854 | 0.991 | 0.948 | 3.726 |
+| room11 | 0.887 | 1.042 | 0.988 | 2.475 |
+| room12 | 0.855 | 0.989 | 0.953 | 2.609 |
 
-**R^2 (higher is better)**
+**R^2, higher is better**
 
-| Scene | U-Net | Pix2Pix | ThermalGAN-style |
-|---|---:|---:|---:|
-| room04 | 0.823 | 0.775 | 0.786 |
-| room05 | 0.880 | 0.833 | 0.850 |
-| room06 | 0.883 | 0.838 | 0.853 |
-| room07 | 0.943 | 0.925 | 0.930 |
-| room08 | 0.830 | 0.772 | 0.789 |
-| room09 | 0.913 | 0.883 | 0.892 |
-| room10 | 0.881 | 0.840 | 0.854 |
-| room11 | 0.888 | 0.845 | 0.860 |
-| room12 | 0.886 | 0.847 | 0.858 |
+| Scene | U-Net | Pix2Pix | ThermalGAN-style | Palette DDPM |
+|---|---|---|---|---|
+| room04 | 0.823 | 0.775 | 0.786 | -0.712 |
+| room05 | 0.880 | 0.833 | 0.850 | 0.185 |
+| room06 | 0.883 | 0.838 | 0.853 | -0.049 |
+| room07 | 0.943 | 0.925 | 0.930 | 0.423 |
+| room08 | 0.830 | 0.772 | 0.789 | -0.169 |
+| room09 | 0.913 | 0.883 | 0.892 | -0.696 |
+| room10 | 0.881 | 0.840 | 0.854 | -1.255 |
+| room11 | 0.888 | 0.845 | 0.860 | 0.124 |
+| room12 | 0.886 | 0.847 | 0.858 | -0.067 |
 
-### Per-scene pseudo-color (U-Net)
+### Per-scene pseudo-color (direct)
 
-| Scene | PSNR ↑ | SSIM ↑ |
-|---|---:|---:|
-| room04 | 21.58 | 0.835 |
-| room05 | 22.31 | 0.843 |
-| room06 | 22.94 | 0.860 |
-| room07 | 26.06 | 0.897 |
-| room08 | 22.96 | 0.873 |
-| room09 | 23.86 | 0.861 |
-| room10 | 23.27 | 0.847 |
-| room11 | 22.63 | 0.854 |
-| room12 | 23.50 | 0.869 |
+**PSNR**
+
+| Scene | U-Net | BicycleGAN | Palette DDPM |
+|---|---|---|---|
+| room04 | 21.580 | 19.382 | 12.713 |
+| room05 | 22.312 | 19.740 | 14.391 |
+| room06 | 22.943 | 20.115 | 14.595 |
+| room07 | 26.064 | 22.712 | 16.400 |
+| room08 | 22.965 | 20.685 | 15.177 |
+| room09 | 23.855 | 20.784 | 14.256 |
+| room10 | 23.267 | 19.471 | 13.897 |
+| room11 | 22.632 | 19.541 | 14.807 |
+| room12 | 23.501 | 20.054 | 14.656 |
+
+**SSIM**
+
+| Scene | U-Net | BicycleGAN | Palette DDPM |
+|---|---|---|---|
+| room04 | 0.835 | 0.771 | 0.550 |
+| room05 | 0.843 | 0.764 | 0.618 |
+| room06 | 0.860 | 0.790 | 0.633 |
+| room07 | 0.897 | 0.827 | 0.679 |
+| room08 | 0.873 | 0.797 | 0.685 |
+| room09 | 0.861 | 0.784 | 0.581 |
+| room10 | 0.847 | 0.753 | 0.562 |
+| room11 | 0.854 | 0.759 | 0.632 |
+| room12 | 0.869 | 0.778 | 0.647 |
 
 ## Example outputs
 
-Each grid shows the visible RGB input, the predicted thermal field/pseudo-color,
-and the real thermal target.
+Each grid shows the visible RGB input, the predicted output, and the real
+thermal target.
 
 ### U-Net, thermal field
 
-![U-Net thermal field example](samples/unet_thermal_epoch100.png)
+![U-Net thermal field](samples/unet_thermal_epoch100.png)
 
 ### U-Net, pseudo-color
 
-![U-Net pseudo-color example](samples/unet_pseudo_epoch100.png)
+![U-Net pseudo-color](samples/unet_pseudo_epoch100.png)
 
-### Pix2Pix, thermal field
+### Pix2Pix, thermal field (also the pseudo-color fallback)
 
-![Pix2Pix thermal field example](samples/pix2pix_thermal_epoch100.png)
-
-### Pix2Pix, pseudo-color
-
-![Pix2Pix pseudo-color example](samples/pix2pix_pseudo_epoch100.png)
+![Pix2Pix thermal field](samples/pix2pix_thermal_epoch100.png)
 
 ### ThermalGAN-style, relative thermal
 
-![ThermalGAN example](samples/thermalgan_epoch100.png)
+![ThermalGAN](samples/thermalgan_epoch100.png)
+
+### Palette DDPM, thermal field
+
+![Palette thermal](samples/palette_thermal.png)
+
+### Palette DDPM, pseudo-color
+
+![Palette pseudo](samples/palette_pseudo.png)
+
+### BicycleGAN, pseudo-color
+
+![BicycleGAN pseudo](samples/bicyclegan.png)
+
