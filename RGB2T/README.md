@@ -41,9 +41,9 @@ Machine-readable JSON is in `results/metrics_*.json`.
   the Inferno colormap (fixed `15-35 degC`) and compared against the same
   rendering of the ground-truth field.
 
-> Status: Palette DDPM and BicycleGAN are evaluated from their current
-> checkpoints (Palette ~92% of steps, BicycleGAN epoch 82/100), so their rows
-> are preliminary. Palette DDPM uses DDIM-100 sampling.
+> Status: Palette DDPM is evaluated from its current checkpoint (~92% of
+> steps) with DDIM-100 sampling, so its row is preliminary and will be
+> refreshed after training completes. BicycleGAN is final (epoch 82).
 
 ### Thermal field accuracy (global)
 
