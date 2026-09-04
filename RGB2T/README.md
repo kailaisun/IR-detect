@@ -161,6 +161,13 @@ rows are each method's pseudo-color output (8 test frames).
 
 ![Pseudo-color comparison](samples/comparison_pseudo.png)
 
+## Thermal-field comparison
+
+Row 1 is the RGB input, row 2 is the GT temperature field, and the following
+rows are each method's predicted temperature field (Inferno, 15-40 degC).
+
+![Thermal-field comparison](samples/comparison_thermal.png)
+
 ## Example outputs
 
 Each grid shows the visible RGB input, the predicted output, and the real thermal target.
