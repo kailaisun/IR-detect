@@ -154,6 +154,13 @@ thermal-field model, BicycleGAN is a 3-channel pseudo-color model).
 | room11 | 0.854 | 0.032 | - | 0.632 | 0.759 |
 | room12 | 0.869 | 0.023 | - | 0.647 | 0.778 |
 
+## Pseudo-color comparison
+
+Row 1 is the RGB input, row 2 is the GT pseudo-color, and the following
+rows are each method's pseudo-color output (8 test frames).
+
+![Pseudo-color comparison](samples/comparison_pseudo.png)
+
 ## Example outputs
 
 Each grid shows the visible RGB input, the predicted output, and the real thermal target.
