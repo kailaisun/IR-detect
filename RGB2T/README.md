@@ -170,9 +170,17 @@ Each grid shows the visible RGB input, the predicted output, and the real therma
 
 ![Pix2Pix, thermal field](samples/pix2pix_thermal_epoch100.png)
 
+### Pix2Pix, pseudo-color (via thermal field)
+
+![Pix2Pix, pseudo-color (via thermal field)](samples/pix2pix_pseudo_viafield.png)
+
 ### ThermalGAN-style, relative thermal
 
 ![ThermalGAN-style, relative thermal](samples/thermalgan_epoch100.png)
+
+### ThermalGAN-style, pseudo-color (via thermal field)
+
+![ThermalGAN-style, pseudo-color (via thermal field)](samples/thermalgan_pseudo_viafield.png)
 
 ### Palette DDPM, thermal field
 
