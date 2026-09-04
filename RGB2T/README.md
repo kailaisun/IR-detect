@@ -29,27 +29,97 @@ Raw thermal `.bin` is read as `uint16`, skip 4 header bytes, reshaped to
 
 Training logs are in `runs/logs`.
 
-## Completed baselines
+## Metrics
 
-The following four models finished 100 epochs and were evaluated on the
-untouched `test.csv` split.
+All numbers are computed on the untouched `test.csv` split (7,505 frames).
+Machine-readable JSON is in `results/metrics_*.json`; the evaluator is
+`evaluate_full.py`.
 
-### Thermal field accuracy
+**Metric definitions**
 
-| Method | Temp MAE (degC) | Temp RMSE (degC) | R^2 | PSNR | SSIM | LPIPS |
+- Thermal field (`thermal` / `relative`): temperature MAE, RMSE, and pooled
+  R^2 are computed in native Celsius on the `(62, 80)` field; PSNR / SSIM /
+  LPIPS are computed on an Inferno colormap rendering with a fixed
+  `15-35 degC` range.
+- Pseudo-color (`pseudo`): PSNR / SSIM / LPIPS are computed on the 3-channel
+  pseudo-color RGB image.
+
+### Thermal field accuracy (global)
+
+| Method | Temp MAE (degC) ↓ | Temp RMSE (degC) ↓ | R^2 ↑ | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
 |---|---:|---:|---:|---:|---:|---:|
-| U-Net | 0.654 | 0.847 | 0.744 | 26.754 | 0.616 | 0.176 |
-| Pix2Pix | 0.753 | 0.981 | 0.655 | 25.519 | 0.572 | 0.068 |
+| U-Net | 0.654 | 0.860 | 0.923 | 26.754 | 0.616 | 0.176 |
+| Pix2Pix | 0.753 | 1.000 | 0.896 | 25.519 | 0.572 | 0.068 |
+| ThermalGAN-style | 0.726 | 0.957 | 0.905 | 25.853 | 0.582 | 0.063 |
 
-### Pseudo-color synthesis
+### Pseudo-color synthesis (global)
 
-| Method | PSNR | SSIM | LPIPS |
+| Method | PSNR ↑ | SSIM ↑ | LPIPS ↓ |
 |---|---:|---:|---:|
 | U-Net | 23.379 | 0.861 | 0.104 |
 | Pix2Pix | 8.761 | 0.038 | 0.630 |
 
-Machine-readable metrics are in `results/metrics_*.json`. Sample grids are in
-`samples/`.
+> Pix2Pix pseudo-color collapsed to near-black output. Those numbers reflect
+> the collapsed model; it is being retrained with an LSGAN objective
+> (`train_pix2pix.py --gan-loss lsgan`) and will be updated.
+
+### Per-scene thermal field
+
+**Temperature MAE (degC, lower is better)**
+
+| Scene | U-Net | Pix2Pix | ThermalGAN-style |
+|---|---:|---:|---:|
+| room04 | 0.700 | 0.789 | 0.772 |
+| room05 | 0.672 | 0.781 | 0.748 |
+| room06 | 0.634 | 0.734 | 0.705 |
+| room07 | 0.644 | 0.735 | 0.714 |
+| room08 | 0.635 | 0.727 | 0.705 |
+| room09 | 0.656 | 0.750 | 0.728 |
+| room10 | 0.649 | 0.747 | 0.721 |
+| room11 | 0.670 | 0.777 | 0.746 |
+| room12 | 0.653 | 0.750 | 0.726 |
+
+**Temperature RMSE (degC, lower is better)**
+
+| Scene | U-Net | Pix2Pix | ThermalGAN-style |
+|---|---:|---:|---:|
+| room04 | 0.933 | 1.051 | 1.026 |
+| room05 | 0.879 | 1.035 | 0.981 |
+| room06 | 0.824 | 0.968 | 0.921 |
+| room07 | 0.860 | 0.982 | 0.951 |
+| room08 | 0.832 | 0.963 | 0.926 |
+| room09 | 0.860 | 0.996 | 0.957 |
+| room10 | 0.854 | 0.991 | 0.948 |
+| room11 | 0.887 | 1.042 | 0.988 |
+| room12 | 0.855 | 0.989 | 0.953 |
+
+**R^2 (higher is better)**
+
+| Scene | U-Net | Pix2Pix | ThermalGAN-style |
+|---|---:|---:|---:|
+| room04 | 0.823 | 0.775 | 0.786 |
+| room05 | 0.880 | 0.833 | 0.850 |
+| room06 | 0.883 | 0.838 | 0.853 |
+| room07 | 0.943 | 0.925 | 0.930 |
+| room08 | 0.830 | 0.772 | 0.789 |
+| room09 | 0.913 | 0.883 | 0.892 |
+| room10 | 0.881 | 0.840 | 0.854 |
+| room11 | 0.888 | 0.845 | 0.860 |
+| room12 | 0.886 | 0.847 | 0.858 |
+
+### Per-scene pseudo-color (U-Net)
+
+| Scene | PSNR ↑ | SSIM ↑ |
+|---|---:|---:|
+| room04 | 21.58 | 0.835 |
+| room05 | 22.31 | 0.843 |
+| room06 | 22.94 | 0.860 |
+| room07 | 26.06 | 0.897 |
+| room08 | 22.96 | 0.873 |
+| room09 | 23.86 | 0.861 |
+| room10 | 23.27 | 0.847 |
+| room11 | 22.63 | 0.854 |
+| room12 | 23.50 | 0.869 |
 
 ## Example outputs
 

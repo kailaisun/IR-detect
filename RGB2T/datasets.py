@@ -131,3 +131,11 @@ class RGB2TInferenceDataset(RGB2TDataset):
     def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor, dict]:
         rgb, target = super().__getitem__(index)
         return rgb, target, self.rows[index]
+
+
+class RGB2TRelInferenceDataset(RGB2TRelDataset):
+    """Like RGB2TRelDataset but additionally returns the source row for per-scene metrics."""
+
+    def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor, dict]:
+        condition, target = super().__getitem__(index)
+        return condition, target, self.rows[index]
