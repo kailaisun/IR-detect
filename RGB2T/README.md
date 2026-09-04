@@ -50,3 +50,28 @@ untouched `test.csv` split.
 
 Machine-readable metrics are in `results/metrics_*.json`. Sample grids are in
 `samples/`.
+
+## Example outputs
+
+Each grid shows the visible RGB input, the predicted thermal field/pseudo-color,
+and the real thermal target.
+
+### U-Net, thermal field
+
+![U-Net thermal field example](samples/unet_thermal_epoch100.png)
+
+### U-Net, pseudo-color
+
+![U-Net pseudo-color example](samples/unet_pseudo_epoch100.png)
+
+### Pix2Pix, thermal field
+
+![Pix2Pix thermal field example](samples/pix2pix_thermal_epoch100.png)
+
+### Pix2Pix, pseudo-color
+
+![Pix2Pix pseudo-color example](samples/pix2pix_pseudo_epoch100.png)
+
+### ThermalGAN-style, relative thermal
+
+![ThermalGAN example](samples/thermalgan_epoch100.png)
