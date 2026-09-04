@@ -27,6 +27,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--lambda-l1", type=float, default=100.0)
+    parser.add_argument("--gan-loss", choices=["bce", "lsgan"], default="bce")
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--sample-every", type=int, default=5)
     parser.add_argument("--save-every", type=int, default=25)
@@ -63,7 +64,7 @@ def main() -> None:
         pin_memory=True,
     )
 
-    criterion_gan = nn.BCEWithLogitsLoss()
+    criterion_gan = nn.BCEWithLogitsLoss() if args.gan_loss == "bce" else nn.MSELoss()
     criterion_l1 = nn.L1Loss()
     optimizer_g = torch.optim.Adam(generator.parameters(), lr=args.lr, betas=(0.5, 0.999))
     optimizer_d = torch.optim.Adam(discriminator.parameters(), lr=args.lr, betas=(0.5, 0.999))
@@ -81,10 +82,16 @@ def main() -> None:
             fake = generator(rgb)
             pred_real = discriminator(torch.cat([rgb, target], 1))
             pred_fake = discriminator(torch.cat([rgb, fake.detach()], 1))
-            loss_d = 0.5 * (
-                criterion_gan(pred_real, torch.ones_like(pred_real))
-                + criterion_gan(pred_fake, torch.zeros_like(pred_fake))
-            )
+            if args.gan_loss == "bce":
+                loss_d = 0.5 * (
+                    criterion_gan(pred_real, torch.ones_like(pred_real))
+                    + criterion_gan(pred_fake, torch.zeros_like(pred_fake))
+                )
+            else:
+                loss_d = 0.5 * (
+                    criterion_gan(pred_real, torch.ones_like(pred_real))
+                    + criterion_gan(pred_fake, torch.zeros_like(pred_fake))
+                )
             optimizer_d.zero_grad(set_to_none=True)
             loss_d.backward()
             optimizer_d.step()
